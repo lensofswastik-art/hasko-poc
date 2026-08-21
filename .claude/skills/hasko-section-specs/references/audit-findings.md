@@ -35,7 +35,7 @@ Auto-rotating carousel of a machine photo with the model name burned into the JP
 | Utility bar tagline | `#62ACDA` | `#333333` | 14px bold | 5.07:1 | pass |
 
 The brand blue passes on the dark utility bar and fails everywhere it sits on white. One token, site-wide reach.
-→ *Closes: `--blue: #1C5CAB` at 6.9:1*
+→ *Closes: drop blue entirely — the interface is built from the logo's red family (`--red`, `--red-action`, `--red-deep`) and neutrals*
 
 **1.6 · Specifications hidden behind a tab that opens on a one-sentence panel**
 Five tabs; the default is "Application", one sentence. The Specifications panel holds material width, arbor HP, saw diameter, sleeve, feed rolls and feed drive — the content a buyer came for, invisible on load.
