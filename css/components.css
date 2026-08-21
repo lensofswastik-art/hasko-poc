@@ -1,0 +1,17 @@
+/* ============================================================================
+   HASKO components — the sixteen reusable components.
+   Anatomy: .claude/skills/hasko-design-system/references/components.md
+   Values only ever come from css/tokens.css — nothing is hardcoded here.
+
+   Built section by section, per CLAUDE.md §14 working process. Empty until
+   the first component-bearing section lands.
+
+     1  Announcement bar        9  Industry card
+     2  Header + mega-menu     10  Testimonial block
+     3  Quote drawer           11  Parts lookup
+     4  Machine card           12  Document row
+     5  Spec table             13  Process rail
+     6  Filter rail + chips    14  Sticky-centre band
+     7  Compare tray           15  Route selector
+     8  Zero-result panel      16  Footer
+   ========================================================================= */
