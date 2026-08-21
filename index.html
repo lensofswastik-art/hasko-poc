@@ -183,7 +183,115 @@
     </div>
   </header>
 
-  <!-- 01 hero -->
+  <!--
+    01 · Hero — closes audit 1.4 (homepage first viewport had no proposition
+    or action, <h1> was the literal string "Home") and convention 1 (first
+    screen states what the company makes). No carousel — one composed frame.
+
+    Layout: `.hero` carries `.on-dark` (steel bg + warm gradient). Below
+    1024px it's a compact stacked column, `min-height:100svh`, with the
+    machine visual dropped to a separate 16:9 band AFTER this </section> so
+    it never counts toward the "hero fits 100svh" measurement (it scrolls
+    into view — the spec calls this out explicitly as not counted against
+    the fold constraint). At 1024px+ the visual becomes a position:absolute
+    panel bleeding off the right edge inside this same section, and height
+    is `max(720px, 88vh)`. The bleed panel and blueprint texture are
+    position:absolute so they never contribute to `.hero`'s own
+    getBoundingClientRect() height regardless of breakpoint.
+
+    The primary CTA is a native <details>/<summary> disclosure rather than
+    a JS-built dropdown — it opens/closes and exposes state to assistive
+    tech with zero JS (works with JS disabled, per the progressive-
+    enhancement requirement in CLAUDE.md §10), and js/motion.js only adds
+    Escape-to-close / click-outside polish on top of that native behaviour.
+  -->
+  <section class="hero on-dark" id="hero" aria-labelledby="hero-heading">
+    <div class="hero__blueprint" aria-hidden="true">
+      <svg width="100%" height="100%" preserveAspectRatio="none" focusable="false">
+        <defs>
+          <pattern id="hero-blueprint-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M40 0H0V40" fill="none" stroke="currentColor" stroke-width="1"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hero-blueprint-grid)"/>
+      </svg>
+    </div>
+
+    <div class="hero__visual" data-parallax aria-hidden="true">
+      <svg viewBox="0 0 480 640" preserveAspectRatio="xMidYMid slice" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="70" y="120" width="340" height="360" rx="4"/>
+          <rect x="70" y="120" width="340" height="70"/>
+          <circle cx="150" cy="330" r="58"/>
+          <circle cx="150" cy="330" r="18"/>
+          <line x1="150" y1="272" x2="150" y2="212"/>
+          <line x1="228" y1="330" x2="380" y2="330"/>
+          <rect x="228" y="300" width="152" height="60"/>
+          <line x1="70" y1="420" x2="410" y2="420"/>
+          <line x1="70" y1="450" x2="410" y2="450"/>
+          <rect x="40" y="480" width="400" height="26"/>
+          <line x1="90" y1="506" x2="90" y2="560"/>
+          <line x1="390" y1="506" x2="390" y2="560"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <p class="hero__eyebrow mono">HEAVY-BUILT PERFORMANCE &middot; SINCE 1930</p>
+        <h1 id="hero-heading" class="hero__headline">Machines that are still running in 25 years.</h1>
+        <p class="hero__standfirst">Hasko builds heavy-duty machinery for solid and engineered flooring, rough mills, moulding and dimensional wood. Designed to be simple to set up, simple to operate, and simple to keep running.</p>
+
+        <div class="hero__ctas">
+          <details class="hero-select" data-hero-select>
+            <summary class="btn btn--primary hero-select__trigger" aria-haspopup="true">
+              Find machines for my application <span class="hero-select__caret" aria-hidden="true">&#9662;</span>
+            </summary>
+            <ul class="hero-select__panel">
+              <li><a href="index.html?application=flooring#machine-finder">Flooring</a></li>
+              <li><a href="index.html?application=ripped-products#machine-finder">Ripped products</a></li>
+              <li><a href="index.html?application=dimensional-wood#machine-finder">Dimensional wood</a></li>
+              <li><a href="index.html?application=moulding#machine-finder">Moulding</a></li>
+            </ul>
+          </details>
+
+          <a href="index.html#machine-finder" class="btn btn--secondary">Browse all 21 machines &rarr;</a>
+        </div>
+      </div>
+
+      <ul class="hero__proof" aria-label="Hasko at a glance">
+        <li class="hero__proof-item mono"><span data-count-to="96">96</span> YEARS</li>
+        <li class="hero__proof-item mono"><span data-count-to="21">21</span> MACHINES</li>
+        <li class="hero__proof-item mono"><span data-count-to="25">25</span>-YEAR SERVICE LIFE</li>
+        <li class="hero__proof-item mono">MADE IN SODDY-DAISY, TN</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Hero machine visual, mobile/tablet only (below 1024px). Structurally
+       outside <section class="hero"> on purpose — it renders below the
+       100svh fold and scrolls into view, so it must never contribute to
+       the hero section's own measured height (see the hero comment above
+       and the responsive-check.mjs "HERO" height rule). -->
+  <div class="hero-mobile-band" aria-hidden="true">
+    <svg viewBox="0 0 480 640" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <g fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="70" y="120" width="340" height="360" rx="4"/>
+        <rect x="70" y="120" width="340" height="70"/>
+        <circle cx="150" cy="330" r="58"/>
+        <circle cx="150" cy="330" r="18"/>
+        <line x1="150" y1="272" x2="150" y2="212"/>
+        <line x1="228" y1="330" x2="380" y2="330"/>
+        <rect x="228" y="300" width="152" height="60"/>
+        <line x1="70" y1="420" x2="410" y2="420"/>
+        <line x1="70" y1="450" x2="410" y2="450"/>
+        <rect x="40" y="480" width="400" height="26"/>
+        <line x1="90" y1="506" x2="90" y2="560"/>
+        <line x1="390" y1="506" x2="390" y2="560"/>
+      </g>
+    </svg>
+  </div>
+
   <!-- 02 trust strip -->
   <!-- 03 industry paths -->
   <!-- 04 machine finder -->
