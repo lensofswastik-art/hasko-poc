@@ -75,7 +75,8 @@ hasko-poc/
 │   ├── motion.js             scroll reveal, count-up, sticky header, mega-menu, focus trap, dialog helpers
 │   └── quote.js              quote drawer: open/close, focus trap, validation, honeypot
 ├── data/
-│   └── machines.json         moved from repo root — 21 machines, taxonomy, specs (SR Series real, rest placeholder)
+│   ├── machines.json         moved from repo root — 21 machines, taxonomy, specs (SR Series real, rest placeholder). Canonical data source, not loaded at runtime.
+│   └── machines.js           generated from machines.json: `window.HASKO_MACHINES = {...}`. What the pages actually load — fetch() of local JSON is CORS-blocked under file://
 ├── assets/
 │   ├── machines/              one reusable seamless-grey silhouette treatment (svg/png), referenced per machine
 │   ├── blueprint/              inline-SVG blueprint line-art fragments (header bg, section dividers, parts diagram)
@@ -104,7 +105,7 @@ HaskoQuote.close();
 // js/finder.js — exposed as window.HaskoFinder
 HaskoFinder.machineCardHTML(machine: MachineRecord): string;   // returns the 7-element card markup, reused by finder grid AND machine.html's related-machines block
 HaskoFinder.applyFiltersFromURL(): void;                        // reads ?application=&process=&width=&hp=&q= on load
-HaskoFinder.renderResults(): void;                               // filters data/machines.json, updates #finder-count via aria-live, writes URL
+HaskoFinder.renderResults(): void;                               // filters window.HASKO_MACHINES, updates #finder-count via aria-live, writes URL
 HaskoFinder.compare: { selected: string[] };                     // up to 3 machine slugs, drives the compare tray
 
 // js/motion.js — exposed as window.HaskoMotion
@@ -116,6 +117,8 @@ HaskoMotion.trapFocus(el: HTMLElement): () => void; // returns a release functio
 ```
 
 `MachineRecord` is the shape already defined in `data/machines.json` — `model`, `name`, `slug`, `category`, `process[]`, `applications[]`, `description`, `capability`, `image`, `specs{}`, `_status`.
+
+**Data loads via a script tag, never `fetch()`.** `CLAUDE.md` §10 requires the demo to "open from a file... with zero build" — under `file://`, `fetch('data/machines.json')` is blocked by CORS in Chrome and Safari (a well-known `file://` limitation, not a bug to work around later). Task 0 generates `data/machines.js`, a plain script assigning the exact same content to a global: `window.HASKO_MACHINES = { ...same shape as machines.json... };`. Every page that needs machine data includes `<script src="data/machines.js"></script>` before `js/finder.js`, and `finder.js` reads `window.HASKO_MACHINES` synchronously — no fetch, no async load, no race with render. `data/machines.json` itself stays in the repo unchanged, as the documented canonical data source `CLAUDE.md` names — `data/machines.js` is a generated runtime sibling, not a replacement.
 
 ---
 
@@ -163,13 +166,13 @@ HaskoMotion.trapFocus(el: HTMLElement): () => void; // returns a release functio
 
 ---
 
-## Phase 0: Reconcile the design-system kit and scaffold the file structure
+## Task 0: Reconcile the design-system kit and scaffold the file structure
 
 No visible output yet — this phase makes every later phase's tooling trustworthy.
 
 **Files:**
 - Create: `.claude/agents/*.md` (copied), `.claude/skills/**` (copied then patched)
-- Create: `index.html`, `machine.html`, `404.html`, `css/tokens.css`, `css/base.css`, `css/components.css`, `css/sections.css`, `js/finder.js`, `js/motion.js`, `js/quote.js` (all as minimal valid skeletons)
+- Create: `index.html`, `machine.html`, `404.html`, `css/tokens.css`, `css/base.css`, `css/components.css`, `css/sections.css`, `js/finder.js`, `js/motion.js`, `js/quote.js`, `data/machines.js` (all as minimal valid skeletons)
 - Move: `machines.json` → `data/machines.json`
 - Move: `public/haskologo.svg` → `assets/haskologo.svg`
 - Modify: `.claude/skills/hasko-design-system/references/tokens.css`, `.claude/skills/hasko-design-system/references/components.md`, `.claude/skills/hasko-section-specs/references/sections.md`, `.claude/skills/hasko-design-system/scripts/validate-tokens.mjs`
@@ -183,6 +186,18 @@ mv machines.json data/machines.json
 mv public/haskologo.svg assets/haskologo.svg
 echo ".qa/" >> .gitignore
 ```
+
+- [ ] **Step 1b: Generate `data/machines.js` — the runtime data load, since `fetch()` is CORS-blocked under `file://`**
+
+```bash
+node -e "
+const fs = require('fs');
+const json = fs.readFileSync('data/machines.json', 'utf8');
+fs.writeFileSync('data/machines.js', 'window.HASKO_MACHINES = ' + json + ';\n');
+"
+```
+
+Confirm `data/machines.js` opens with `window.HASKO_MACHINES = {` and is valid JS (the trailing `;` after the JSON literal is what makes it an assignment rather than a bare object literal — a bare `{...}` at the start of a statement is a syntax error, so this exact form matters). `data/machines.json` is untouched and stays the canonical source; `data/machines.js` is what every page's `<script>` tag actually loads.
 
 - [ ] **Step 2: Replace the stale tokens reference with `CLAUDE.md`'s current token block**
 
@@ -225,6 +240,8 @@ Reset (box-sizing, margin removal on headings/lists), the Google Fonts `<link>` 
 
 Each gets `<!DOCTYPE html>`, `<html lang="en">`, `<head>` with the font preconnect/link block, `<link rel="stylesheet" href="css/tokens.css">` → `base.css` → `components.css` → `sections.css` in that order, a real `<title>` (not "Home" — audit 1.4), and a meta description. `index.html`'s `<body>` gets HTML comments marking each section slot: `<!-- 00 announcement --> <!-- header --> <!-- 01 hero --> ... <!-- 12 footer -->` so later phases insert in the right place without hunting.
 
+Script tag order at the bottom of `<body>`, before the closing tag — same on every page that needs machine data: `<script src="data/machines.js"></script>` (only on `index.html` and `machine.html` — `404.html` never renders a machine card, it only redirects the search field into `index.html`'s query string, so it does not need this tag) → `<script src="js/finder.js"></script>` (`index.html` and `machine.html` only, same reasoning) → `<script src="js/motion.js"></script>` (all three pages) → `<script src="js/quote.js"></script>` (all three pages). `finder.js` and `quote.js` both read from `window.HaskoMotion` for `trapFocus`/reveal helpers, so `motion.js` loads first among the three.
+
 - [ ] **Step 9: Verify the scaffold is clean**
 
 ```bash
@@ -244,7 +261,7 @@ git commit -m "Scaffold static build, reconcile design-system kit with CLAUDE.md
 
 ---
 
-## Phase 1: Global chrome — header + mega-menu, footer, quote drawer
+## Task 1: Global chrome — header + mega-menu, footer, quote drawer
 
 These three are listed "Should" in the build order, but every "Must" section either links into the header nav or opens the quote drawer, so they're built first as shared infrastructure. Dispatch to `section-builder`, scoped explicitly to these three components (not a numbered section).
 
@@ -276,6 +293,8 @@ Component #3, full implementation in `js/quote.js` per the `HaskoQuote` interfac
 
 Wire a placeholder `<form>` `action`/submit handler that prevents default and shows the success state locally (no real backend exists in this demo — note this explicitly in your final report so it isn't mistaken for a wired integration).
 
+**The drawer markup, and `<script src="js/quote.js">`/`<script src="js/motion.js">`, go on all three pages, not just `index.html`.** Every page's header carries a persistent "Request a Quote" button (Step 1), and Task 6 (`machine.html`) calls `HaskoQuote.open()` from its sticky quote panel — both need the drawer's actual DOM and scripts present, not just a function call with nothing to open. Insert the same drawer markup into `index.html`, `machine.html`, and `404.html` at build time (static duplication, same pattern as the header/footer — there is no templating layer in a build-step-free static site).
+
 - [ ] **Step 6: Verify**
 
 ```bash
@@ -297,7 +316,7 @@ git commit -m "Build header/mega-menu, footer, quote drawer — closes 1.5, 2.1,
 
 ---
 
-## Phase 2: Hero (section 01)
+## Task 2: Hero (section 01)
 
 **Files:** `index.html` (section 01 markup), `css/sections.css`, `js/motion.js` (`initCountUp`, hero's inline application-selector expansion), `assets/` (in-plant documentary placeholder treatment)
 
@@ -309,7 +328,7 @@ Build exactly to `CLAUDE.md` §6 "01 · Hero" — both desktop and mobile wirefr
 - Eyebrow: `HEAVY-BUILT PERFORMANCE · SINCE 1930` (mono, `--fs-index`)
 - `<h1>`: **Machines that are still running in 25 years.** — this is the literal fix for audit 1.4 ("The `<h1>` is the string 'Home'"); confirm via `grep -o '<h1[^>]*>[^<]*</h1>' index.html` that it renders this exact sentence, not "Home" or anything generic.
 - Standfirst paragraph verbatim from the spec
-- Primary button: `Find machines for my application ▾` — expands a four-way inline selector (Flooring / Ripped products / Dimensional wood / Moulding) with **no page load**, then navigates to `#machine-finder?application=<slug>` (Phase 5's finder reads this on load via `applyFiltersFromURL()`)
+- Primary button: `Find machines for my application ▾` — expands a four-way inline selector (Flooring / Ripped products / Dimensional wood / Moulding) with **no page load**, then navigates to `?application=<slug>#machine-finder` (Phase 5's finder reads this on load via `applyFiltersFromURL()`)
 - Secondary button: `Browse all 21 machines →` → `#machine-finder`
 - Proof strip: `96 YEARS` · `21 MACHINES` · `25-YEAR SERVICE LIFE` · `MADE IN SODDY-DAISY, TN` — each figure is a `[data-count-to]` element where the value is numeric (96, 21, 25), the two non-numeric ones render statically
 
@@ -350,7 +369,7 @@ git commit -m "Build hero section — closes audit 1.4, convention 1"
 
 ---
 
-## Phase 3: Announcement bar (00) + Trust strip (02)
+## Task 3: Announcement bar (00) + Trust strip (02)
 
 Both small, both listed "Should," both independent of everything else — bundled into one phase.
 
@@ -387,7 +406,7 @@ git commit -m "Build announcement bar and trust strip — closes 3.9, convention
 
 ---
 
-## Phase 4: Industry paths (section 03)
+## Task 4: Industry paths (section 03)
 
 **Files:** `index.html` (section 03), `css/components.css` (component #9, full version — Phase 1's mega-menu thumbnails were a compact variant of this), `css/sections.css`, `js/motion.js` (progress rail arrow buttons)
 
@@ -411,7 +430,7 @@ Mobile: 1.2 cards visible so the next card is deliberately cut off (a hard width
 
 - [ ] **Step 5: Card destinations**
 
-Each card's link (and its arrow) points at `#machine-finder?application=<slug>` using the same four slugs as `data/machines.json`'s `_filters.application` array (`flooring`, `ripped-products`, `dimensional-wood`, `moulding`) — this is what makes Phase 5's finder pre-filter correctly when a buyer arrives from here.
+Each card's link (and its arrow) points at `?application=<slug>#machine-finder` using the same four slugs as `data/machines.json`'s `_filters.application` array (`flooring`, `ripped-products`, `dimensional-wood`, `moulding`) — this is what makes Phase 5's finder pre-filter correctly when a buyer arrives from here.
 
 - [ ] **Step 6: Verify**
 
@@ -434,7 +453,7 @@ git commit -m "Build industry paths section — closes audit 2.1"
 
 ---
 
-## Phase 5: Machine finder (section 04) — the core section
+## Task 5: Machine finder (section 04) — the core section
 
 The largest phase. Four components ship here: machine card, filter rail + chips, compare tray, zero-result panel.
 
@@ -460,7 +479,7 @@ Active filters render as removable chip `<button>`s, `--red-tint` fill, `--red-i
 
 - [ ] **Step 3: URL state**
 
-`HaskoFinder.renderResults()` writes the current filter state to the URL via `history.replaceState` on every change: `?application=flooring&width=24-36`. `HaskoFinder.applyFiltersFromURL()` runs on `DOMContentLoaded` and reads these back — this is also what makes Phase 2's hero selector and Phase 4's industry cards work (they navigate to `#machine-finder?application=<slug>`, which this function parses on load). Reflow (grid re-layout on filter change) uses `--t-reflow` (240ms).
+`HaskoFinder.renderResults()` writes the current filter state to the URL via `history.replaceState` on every change: `?application=flooring&width=24-36`. `HaskoFinder.applyFiltersFromURL()` runs on `DOMContentLoaded` and reads these back — this is also what makes Phase 2's hero selector and Phase 4's industry cards work (they navigate to `?application=<slug>#machine-finder`, which this function parses on load). Reflow (grid re-layout on filter change) uses `--t-reflow` (240ms).
 
 - [ ] **Step 4: Compare tray**
 
@@ -499,7 +518,7 @@ git commit -m "Build machine finder — closes 2.3, 3.3, 3.4, 3.6; completes con
 
 ---
 
-## Phase 6: Machine detail page (`machine.html`, SR-36 worked example)
+## Task 6: Machine detail page (`machine.html`, SR-36 worked example)
 
 **Files:** `machine.html` (full page), `css/components.css` (component #5), `css/sections.css` (machine-page-specific layout), `js/finder.js` (reuse `machineCardHTML` for related machines)
 
@@ -548,7 +567,7 @@ git commit -m "Build machine detail page (SR-36) — closes 1.3, 1.6, 2.8, 2.9, 
 
 ---
 
-## Phase 7: Proof (section 06)
+## Task 7: Proof (section 06)
 
 **Files:** `index.html` (section 06), `css/components.css` (component #10, full build — Phase 6 used a minimal instance), `css/sections.css`, `js/motion.js` (count-up reuse)
 
@@ -590,7 +609,7 @@ git commit -m "Build proof section — closes audit 2.2, field gap +1 (named cus
 
 ---
 
-## Phase 8: Parts & service (section 07)
+## Task 8: Parts & service (section 07)
 
 **Files:** `index.html` (section 07), `css/components.css` (components #11, #12), `css/sections.css`, `js/quote.js` (parts-mode wiring, already supported by the interface built in Phase 1)
 
@@ -633,7 +652,7 @@ git commit -m "Build parts and service section — closes audit 2.4"
 
 ---
 
-## Phase 9: Integrated lines (05) + Why heavy-built (08)
+## Task 9: Integrated lines (05) + Why heavy-built (08)
 
 Both "Nice," both structurally novel (process rail, sticky-centre band), bundled since neither depends on the other and both are dark/mid-page bands.
 
@@ -668,7 +687,7 @@ git commit -m "Build integrated lines and why-heavy-built sections"
 
 ---
 
-## Phase 10: Automation (09) + Resources (10)
+## Task 10: Automation (09) + Resources (10)
 
 **Files:** `index.html` (sections 09, 10), `css/components.css` (component #12 reused), `css/sections.css`
 
@@ -699,7 +718,7 @@ git commit -m "Build automation and resources sections — closes audit 3.2"
 
 ---
 
-## Phase 11: Contact (section 11)
+## Task 11: Contact (section 11)
 
 **Files:** `index.html` (section 11), `css/components.css` (component #15), `css/sections.css`
 
@@ -734,7 +753,7 @@ git commit -m "Build contact section — closes audit 2.5"
 
 ---
 
-## Phase 12: 404 page
+## Task 12: 404 page
 
 **Files:** `404.html`
 
@@ -746,7 +765,7 @@ Per `CLAUDE.md` §7 Template B — reuse the header/footer from Phase 1 (already
 
 - [ ] **Step 2: Recovery paths**
 
-Search field (`<label>` "Search machines, parts and documents") — wire it to redirect to `index.html#machine-finder?q=<value>` on submit, reusing Phase 5's finder search rather than building a second search implementation. Four industry links (Flooring/Ripped/Dimensional/Moulding) reusing the same slugs as Phase 4. "Looking for a part? Machine model ▾ → Find parts" — a compact version of Phase 8's lookup, linking into the parts section. Real `tel:` link.
+Search field (`<label>` "Search machines, parts and documents") — wire it to redirect to `index.html?q=<value>#machine-finder` on submit, reusing Phase 5's finder search rather than building a second search implementation. Four industry links (Flooring/Ripped/Dimensional/Moulding) reusing the same slugs as Phase 4. "Looking for a part? Machine model ▾ → Find parts" — a compact version of Phase 8's lookup, linking into the parts section. Real `tel:` link.
 
 - [ ] **Step 3: Verify and commit**
 
@@ -765,7 +784,7 @@ git commit -m "Build 404 page — closes audit 1.2"
 
 ---
 
-## Phase 13: Full-site verification, audit coverage, and handoff
+## Task 13: Full-site verification, audit coverage, and handoff
 
 No new sections — this phase proves the whole claim rather than one part of it.
 
