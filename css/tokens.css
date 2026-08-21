@@ -104,6 +104,15 @@
 .on-dark {
   --focus: #FFFFFF;                  /* 16.56:1 on --steel                */
   --red:   var(--red-light);         /* --red at 3.36:1 on steel FAILS    */
+  /* --focus-ring must be redeclared here, not just --focus. Custom
+     properties don't get free dynamic re-evaluation: --focus-ring's only
+     declaration is at :root, so its `var(--focus)` reference is resolved
+     once using :root's own --focus (--ink), and that already-resolved
+     "2px solid #0E1116" string is what inherits down into .on-dark
+     subtrees — .on-dark overriding --focus alone does not change it.
+     Redeclaring --focus-ring here forces var(--focus) to resolve again
+     at this cascade point, using .on-dark's own --focus (#FFFFFF).      */
+  --focus-ring: 2px solid var(--focus);
 }
 
 /* Required. Every transform, transition and animation renders at final
