@@ -16,7 +16,170 @@
   <link rel="stylesheet" href="css/sections.css">
 </head>
 <body>
-  <!-- header -->
+  <!-- header
+       Anchor-id contract for later tasks — this task wires nav/footer links
+       to the ids the not-yet-built sections will carry. When a later task
+       builds one of these, give the <section> this exact id:
+         03 industry paths     -> id="industries"
+         04 machine finder     -> id="machine-finder"   (explicit in the brief)
+         05 integrated lines   -> id="integrated-lines"
+         06 proof              -> id="proof"
+         07 parts & service    -> id="parts-service"
+         08 why heavy-built    -> id="why-heavy-built"  (also serves as "About" — the
+                                  page has no dedicated About section; this is the
+                                  closest company-story content, see task-1 report)
+         09 automation         -> id="automation"
+         10 resources          -> id="resources"
+         11 contact            -> id="contact"          (explicit in the brief)
+  -->
+  <header class="site-header" data-site-header>
+    <div class="header-utility on-dark">
+      <div class="container header-utility__inner">
+        <ul class="header-utility__badges">
+          <li class="mono">SINCE 1930</li>
+          <li class="mono">MADE IN THE USA</li>
+        </ul>
+        <ul class="header-utility__links">
+          <li><a href="tel:+14236485200" class="header-utility__link"><span class="mono">423.648.5200</span></a></li>
+          <li><a href="index.html#parts-service" class="header-utility__link">Parts</a></li>
+          <li><a href="index.html#contact" class="header-utility__link">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="header-primary">
+      <div class="container header-primary__inner">
+        <a href="index.html" class="header-logo" aria-label="HASKO home">
+          <img src="assets/haskologo.svg" alt="HASKO" width="148" height="33">
+        </a>
+
+        <nav class="header-nav" aria-label="Primary">
+          <ul class="header-nav__list">
+            <li class="header-nav__item has-menu" data-mega-menu-item>
+              <button type="button" class="header-nav__trigger" data-mega-menu-trigger aria-expanded="false" aria-controls="mega-industries">
+                Industries
+                <svg class="header-nav__chevron" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="mega-menu" id="mega-industries" data-mega-menu-panel hidden>
+                <div class="mega-menu__inner">
+                  <ul class="mega-menu__industries">
+                    <li class="mega-menu__industry-card">
+                      <a href="index.html#industries">
+                        <span class="mega-menu__industry-title">Solid &amp; engineered flooring</span>
+                        <span class="mega-menu__industry-desc">End matchers, side matchers, pre-surfacers, truck flooring</span>
+                        <span class="mega-menu__industry-count">7 MACH.</span>
+                      </a>
+                    </li>
+                    <li class="mega-menu__industry-card">
+                      <a href="index.html#industries">
+                        <span class="mega-menu__industry-title">Ripped products &amp; rough mill</span>
+                        <span class="mega-menu__industry-desc">Gang ripsaws, scan/rip lines, strip saws</span>
+                        <span class="mega-menu__industry-count">6 MACH.</span>
+                      </a>
+                    </li>
+                    <li class="mega-menu__industry-card">
+                      <a href="index.html#industries">
+                        <span class="mega-menu__industry-title">Dimensional wood, furniture &amp; cabinetry</span>
+                        <span class="mega-menu__industry-desc">Chopping, defect scanning, optimisation</span>
+                        <span class="mega-menu__industry-count">5 MACH.</span>
+                      </a>
+                    </li>
+                    <li class="mega-menu__industry-card">
+                      <a href="index.html#industries">
+                        <span class="mega-menu__industry-title">Moulding &amp; panelling</span>
+                        <span class="mega-menu__industry-desc">Matchers, planers, surfacers</span>
+                        <span class="mega-menu__industry-count">3 MACH.</span>
+                      </a>
+                    </li>
+                  </ul>
+                  <p class="mega-menu__footer">
+                    Not sure which line you need?
+                    <a href="index.html#contact">Talk to an engineer →</a>
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li class="header-nav__item has-menu" data-mega-menu-item>
+              <button type="button" class="header-nav__trigger" data-mega-menu-trigger aria-expanded="false" aria-controls="mega-machines">
+                Machines
+                <svg class="header-nav__chevron" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="mega-menu mega-menu--machines" id="mega-machines" data-mega-menu-panel hidden>
+                <div class="mega-menu__inner">
+                  <ul class="mega-menu__categories">
+                    <li><a href="index.html#machine-finder">Board ripping</a></li>
+                    <li><a href="index.html#machine-finder">Side matching</a></li>
+                    <li><a href="index.html#machine-finder">End matching</a></li>
+                    <li><a href="index.html#machine-finder">Planing &amp; surfacing</a></li>
+                    <li><a href="index.html#machine-finder">Chopping</a></li>
+                    <li><a href="index.html#machine-finder">Scanning &amp; optimizing</a></li>
+                    <li><a href="index.html#machine-finder">Feeding systems</a></li>
+                    <li><a href="index.html#machine-finder">Short stock feeding</a></li>
+                    <li><a href="index.html#machine-finder">Material handling</a></li>
+                    <li><a href="index.html#machine-finder">Special machines</a></li>
+                    <li><a href="index.html#machine-finder">Used machinery</a></li>
+                  </ul>
+                  <p class="mega-menu__footer">
+                    <a href="index.html#machine-finder" class="mega-menu__view-all">View all 21 machines →</a>
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li class="header-nav__item"><a href="index.html#automation">Automation</a></li>
+            <li class="header-nav__item"><a href="index.html#parts-service">Parts &amp; Service</a></li>
+            <li class="header-nav__item"><a href="index.html#why-heavy-built">About</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <form class="header-search" role="search" action="index.html" method="get">
+            <label for="header-search-input" class="header-search__label">Search</label>
+            <input type="search" id="header-search-input" name="q" class="header-search__input" placeholder="Machines, parts, docs…">
+            <button type="submit" class="header-search__submit" aria-label="Search">
+              <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="5.25" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M11.2 11.2L15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+          </form>
+
+          <button type="button" class="btn btn--primary header-quote-btn" data-open-quote data-quote-mode="quote">
+            Request a Quote
+          </button>
+
+          <button type="button" class="header-mobile-toggle" data-mobile-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+            <span class="header-mobile-toggle__bar" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+      <div class="mobile-nav__header">
+        <a href="index.html" class="header-logo" aria-label="HASKO home">
+          <img src="assets/haskologo.svg" alt="HASKO" width="120" height="27">
+        </a>
+        <button type="button" class="mobile-nav__close" data-mobile-close aria-label="Close menu">
+          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M1 1l16 16M17 1L1 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <nav class="mobile-nav__list" aria-label="Primary">
+        <ul>
+          <li><a href="index.html#industries">Industries</a></li>
+          <li><a href="index.html#machine-finder">Machines</a></li>
+          <li><a href="index.html#automation">Automation</a></li>
+          <li><a href="index.html#parts-service">Parts &amp; Service</a></li>
+          <li><a href="index.html#why-heavy-built">About</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="mobile-nav__footer">
+        <a href="tel:+14236485200" class="mobile-nav__phone mono">423.648.5200</a>
+        <button type="button" class="btn btn--primary mobile-nav__cta" data-open-quote data-quote-mode="quote">
+          Request a Quote
+        </button>
+      </div>
+    </div>
+  </header>
 
   <!--
     Template A · Machine detail page (SR-36 worked example)
@@ -30,11 +193,203 @@
   <main>
   </main>
 
-  <!-- footer -->
+  <!-- 12 footer -->
+  <footer class="site-footer on-dark" data-site-footer>
+    <div class="container footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="header-logo" aria-label="HASKO home">
+          <img src="assets/haskologo.svg" alt="HASKO" class="footer-brand__logo" width="140" height="31">
+        </a>
+        <p class="footer-brand__tagline mono">HEAVY-BUILT PERFORMANCE · SINCE 1930</p>
+      </div>
+
+      <nav class="footer-nav" aria-labelledby="footer-nav-machines">
+        <h3 id="footer-nav-machines" class="footer-nav__heading">Machines</h3>
+        <ul>
+          <li><a href="index.html#machine-finder">Board ripping</a></li>
+          <li><a href="index.html#machine-finder">Side matching</a></li>
+          <li><a href="index.html#machine-finder">End matching</a></li>
+          <li><a href="index.html#machine-finder">Planing &amp; surfacing</a></li>
+          <li><a href="index.html#machine-finder">Chopping</a></li>
+          <li><a href="index.html#machine-finder">Scanning &amp; optimizing</a></li>
+          <li><a href="index.html#machine-finder">Feeding systems</a></li>
+          <li><a href="index.html#machine-finder">Short stock feeding</a></li>
+          <li><a href="index.html#machine-finder">Material handling</a></li>
+          <li><a href="index.html#machine-finder">Special machines</a></li>
+          <li><a href="index.html#machine-finder">Used machinery</a></li>
+          <li><a href="index.html#machine-finder" class="footer-nav__view-all">View all 21 →</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-labelledby="footer-nav-industries">
+        <h3 id="footer-nav-industries" class="footer-nav__heading">Industries</h3>
+        <ul>
+          <li><a href="index.html#industries">Flooring</a></li>
+          <li><a href="index.html#industries">Ripped products</a></li>
+          <li><a href="index.html#industries">Dimensional wood</a></li>
+          <li><a href="index.html#industries">Moulding</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-labelledby="footer-nav-company">
+        <h3 id="footer-nav-company" class="footer-nav__heading">Company</h3>
+        <ul>
+          <li><a href="index.html#why-heavy-built">About Hasko</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">News</a></li>
+          <li><a href="#">Contract manufacturing</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer-nav" aria-labelledby="footer-nav-support">
+        <h3 id="footer-nav-support" class="footer-nav__heading">Support</h3>
+        <ul>
+          <li><a href="index.html#parts-service">Parts &amp; Service</a></li>
+          <li><button type="button" class="footer-nav__link-button" data-open-quote data-quote-mode="quote">Request a quote</button></li>
+          <li><a href="index.html#resources">Resources</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="container footer-bottom">
+      <p class="footer-bottom__address">
+        HASKO Inc. · Soddy-Daisy, TN ·
+        <a href="tel:+14236485200" class="mono">423.648.5200</a> ·
+        <a href="mailto:hello@haskomachines.com">hello@haskomachines.com</a>
+      </p>
+
+      <div class="footer-bottom__marks">
+        <span class="footer-mark mono">WMMA</span>
+      </div>
+
+      <ul class="footer-bottom__social" aria-label="HASKO on social media">
+        <li>
+          <a href="#" aria-label="HASKO on LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm7 0h3.8v1.64h.05c.53-.98 1.83-2.02 3.77-2.02 4.03 0 4.78 2.55 4.78 5.86V21h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.44-2.16 2.96V21h-4V9z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#" aria-label="HASKO on Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.97.24 2.43.4a4.9 4.9 0 011.77 1.15 4.9 4.9 0 011.15 1.77c.16.46.35 1.26.4 2.43.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.24 1.97-.4 2.43a4.9 4.9 0 01-1.15 1.77 4.9 4.9 0 01-1.77 1.15c-.46.16-1.26.35-2.43.4-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.97-.24-2.43-.4a4.9 4.9 0 01-1.77-1.15A4.9 4.9 0 011.8 19.7c-.16-.46-.35-1.26-.4-2.43C1.34 16 1.33 15.62 1.33 12.4s.01-3.58.07-4.85c.05-1.17.24-1.97.4-2.43A4.9 4.9 0 013 3.35a4.9 4.9 0 011.77-1.15c.46-.16 1.26-.35 2.43-.4C8.47 1.74 8.85 1.73 12 1.73v.47zm0 3.13a6.07 6.07 0 100 12.14 6.07 6.07 0 000-12.14zm0 10.02a3.95 3.95 0 110-7.9 3.95 3.95 0 010 7.9zm6.31-10.26a1.42 1.42 0 11-2.84 0 1.42 1.42 0 012.84 0z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#" aria-label="HASKO on Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M13.5 22v-8.6h2.9l.4-3.4h-3.3V7.8c0-1 .3-1.6 1.7-1.6h1.7V3.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4v3.4h2.8V22h3.3z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#" aria-label="HASKO on YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M22.5 7.2a2.9 2.9 0 00-2-2C18.7 4.7 12 4.7 12 4.7s-6.7 0-8.5.5a2.9 2.9 0 00-2 2A30 30 0 001 12a30 30 0 00.5 4.8 2.9 2.9 0 002 2c1.8.5 8.5.5 8.5.5s6.7 0 8.5-.5a2.9 2.9 0 002-2A30 30 0 0023 12a30 30 0 00-.5-4.8zM9.8 15.3V8.7l5.8 3.3-5.8 3.3z"/></svg>
+          </a>
+        </li>
+      </ul>
+
+      <div class="footer-bottom__legal">
+        <p>© 2026 HASKO Inc.</p>
+        <a href="#">Privacy</a>
+        <a href="#">Accessibility statement</a>
+      </div>
+    </div>
+  </footer>
+
+  <!--
+    Component #3 · Quote drawer — closes 1.3, 2.6
+    Invoked from anywhere via window.HaskoQuote.open({ machine, mode, serial,
+    application, trigger }). No real backend exists in this demo — submit
+    prevents default and shows the success state locally (js/quote.js).
+  -->
+  <div class="quote-drawer" data-quote-drawer hidden>
+    <div class="quote-drawer__backdrop" data-quote-backdrop></div>
+    <div class="quote-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="quote-drawer-title" data-quote-panel tabindex="-1">
+      <div class="quote-drawer__header">
+        <h2 id="quote-drawer-title" class="quote-drawer__title" data-quote-title>Request a quote</h2>
+        <button type="button" class="quote-drawer__close" data-quote-close aria-label="Close quote form">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M1 1l14 14M15 1L1 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <div class="quote-drawer__body">
+        <form class="quote-form" data-quote-form novalidate>
+          <div class="quote-form__honeypot" aria-hidden="true">
+            <label for="quote-website">Leave this field blank</label>
+            <input type="text" id="quote-website" name="website" tabindex="-1" autocomplete="off" data-quote-honeypot>
+          </div>
+
+          <div class="quote-form__field">
+            <label for="quote-machine">Machine of interest</label>
+            <input type="text" id="quote-machine" name="machine" data-quote-machine placeholder="e.g. SR-36 Gang Ripsaw">
+          </div>
+
+          <div class="quote-form__field">
+            <label for="quote-serial">Serial number <span class="quote-form__optional">(optional)</span></label>
+            <input type="text" id="quote-serial" name="serial" data-quote-serial placeholder="e.g. SR36-1042">
+          </div>
+
+          <div class="quote-form__field">
+            <label for="quote-application">What are you making?</label>
+            <input type="text" id="quote-application" name="application" data-quote-application placeholder="e.g. engineered flooring">
+          </div>
+
+          <div class="quote-form__field">
+            <label for="quote-name">Full name</label>
+            <input type="text" id="quote-name" name="name" autocomplete="name" required>
+          </div>
+
+          <div class="quote-form__field">
+            <label for="quote-company">Company</label>
+            <input type="text" id="quote-company" name="company" autocomplete="organization" required>
+          </div>
+
+          <div class="quote-form__field">
+            <label for="quote-email">Email</label>
+            <input type="email" id="quote-email" name="email" autocomplete="email" required>
+          </div>
+
+          <div class="quote-form__field">
+            <label for="quote-phone">Phone</label>
+            <input type="tel" id="quote-phone" name="phone" autocomplete="tel">
+          </div>
+
+          <div class="quote-form__field">
+            <label for="quote-timeline">Timeline</label>
+            <select id="quote-timeline" name="timeline">
+              <option value="">Select a timeline</option>
+              <option value="this-week">This week</option>
+              <option value="this-month">This month</option>
+              <option value="this-quarter">This quarter</option>
+              <option value="just-researching">Just researching</option>
+            </select>
+          </div>
+
+          <div class="quote-form__field">
+            <label for="quote-message">Message <span class="quote-form__optional">(optional)</span></label>
+            <textarea id="quote-message" name="message" rows="4"></textarea>
+          </div>
+
+          <p class="quote-form__error" data-quote-error aria-live="polite" hidden></p>
+
+          <button type="submit" class="btn btn--primary quote-form__submit" data-quote-submit>Send request</button>
+        </form>
+
+        <div class="quote-form__success" data-quote-success hidden tabindex="-1">
+          <p>Sent. Steve Pugh or someone on the sales team will come back to you within one business day.</p>
+          <button type="button" class="btn btn--secondary" data-quote-close>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="data/machines.js"></script>
   <script src="js/motion.js"></script>
   <script src="js/finder.js"></script>
   <script src="js/quote.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      HaskoMotion.initStickyHeader();
+      HaskoMotion.initMegaMenu();
+    });
+  </script>
 </body>
 </html>

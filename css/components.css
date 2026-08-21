@@ -15,3 +15,671 @@
      7  Compare tray           15  Route selector
      8  Zero-result panel      16  Footer
    ========================================================================= */
+
+/* ============================================================================
+   Shared primitives — buttons. Not one of the sixteen; a base every
+   component that carries a call to action (header, drawer, footer) reuses.
+   ========================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--r-input);
+  font-family: var(--font-secondary);
+  font-size: var(--fs-ui);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: background-color var(--t-micro) var(--ease-standard),
+              border-color var(--t-micro) var(--ease-standard),
+              color var(--t-micro) var(--ease-standard);
+}
+
+.btn--primary {
+  background: var(--red-action);
+  color: var(--on-steel); /* #FFFFFF — the white label token, reused: 6.09:1 on --red-action */
+}
+.btn--primary:hover { background: var(--red-deep); }
+
+.btn--secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--rule-strong);
+}
+.btn--secondary:hover { border-color: var(--ink); }
+
+/* ============================================================================
+   2 · Header + mega-menu — closes 1.5, 2.1
+   Two rows collapsing to one past 120px scroll. Nav links are --ink, never
+   the banned blue. Mega-menus open on hover and click/Enter, close on Esc
+   and on focus leaving the menu, and trap focus while open.
+   ========================================================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  width: 100%;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--rule);
+}
+
+/* ---- utility row — collapses when .is-condensed is added ----------------- */
+.header-utility {
+  overflow: hidden;
+  max-height: 44px;
+  opacity: 1;
+  transition: max-height var(--t-standard) var(--ease-standard),
+              opacity var(--t-standard) var(--ease-standard);
+}
+.site-header.is-condensed .header-utility {
+  max-height: 0;
+  opacity: 0;
+}
+
+.header-utility__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+  gap: var(--space-6);
+}
+
+.header-utility__badges,
+.header-utility__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.header-utility__badges li {
+  font-size: var(--fs-small);
+  color: var(--on-steel-2);
+  letter-spacing: var(--tr-index);
+}
+.header-utility__badges li + li::before {
+  content: "·";
+  margin-inline-end: var(--space-4);
+  color: var(--on-steel-3);
+}
+
+/* Below tablet width, "SINCE 1930 · MADE IN THE USA · 423.648.5200 ·
+   Parts · Contact" no longer fits one 44px row and wraps into itself —
+   the badges are restated in the hero eyebrow and the links are restated
+   in the mobile nav footer, so they're safe to drop from this row here. */
+@media (max-width: 767px) {
+  .header-utility__badges { display: none; }
+  .header-utility__inner { justify-content: center; }
+}
+
+.header-utility__link {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--fs-small);
+  color: var(--on-steel-2);
+  border-bottom: 1px solid transparent;
+}
+.header-utility__link:hover {
+  color: var(--on-steel);
+  border-bottom-color: var(--rule-dark);
+}
+
+/* ---- primary row ----------------------------------------------------------- */
+.header-primary__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: 76px;
+}
+
+.header-logo {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+}
+.header-logo img { height: 28px; width: auto; }
+
+.header-nav { flex: 1; }
+.header-nav__list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.header-nav__item { position: relative; }
+
+.header-nav__item > a {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3) 0;
+  font-family: var(--font-secondary);
+  font-size: var(--fs-ui);
+  font-weight: var(--fw-medium);
+  color: var(--ink);
+  border-bottom: 2px solid transparent;
+}
+.header-nav__item > a:hover {
+  color: var(--red-deep);
+  border-bottom-color: var(--red);
+}
+
+.header-nav__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--target-min);
+  padding: var(--space-2) var(--space-2);
+  font-family: var(--font-secondary);
+  font-size: var(--fs-ui);
+  font-weight: var(--fw-medium);
+  color: var(--ink);
+  border-radius: var(--r-input);
+}
+.header-nav__trigger:hover { color: var(--red-deep); }
+.header-nav__chevron { transition: transform var(--t-micro) var(--ease-standard); }
+.header-nav__item.is-open .header-nav__chevron { transform: rotate(180deg); }
+
+/* ---- mega-menu panel -------------------------------------------------------- */
+.mega-menu[hidden] { display: none; }
+.mega-menu:not([hidden]) {
+  display: block;
+  position: absolute;
+  top: calc(100% + var(--space-3));
+  left: 50%;
+  transform: translate(-50%, -8px);
+  z-index: 50;
+  opacity: 0;
+  min-width: 420px;
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-raised);
+  transition: opacity var(--t-standard) var(--ease-standard),
+              transform var(--t-standard) var(--ease-standard);
+}
+.mega-menu.is-open {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.mega-menu__inner { padding: var(--space-6); }
+
+.mega-menu__industries {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  min-width: 520px;
+}
+.mega-menu__industry-card a {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border-radius: var(--r-input);
+  background: var(--surface-3);
+}
+.mega-menu__industry-card a:hover { background: var(--red-tint); }
+.mega-menu__industry-title {
+  font-family: var(--font-primary);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semi);
+  color: var(--ink);
+}
+.mega-menu__industry-desc {
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+}
+.mega-menu__industry-count {
+  margin-top: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  color: var(--red-deep);
+}
+
+.mega-menu--machines .mega-menu__categories {
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  grid-auto-flow: column;
+  gap: var(--space-1) var(--space-8);
+  min-width: 560px;
+}
+.mega-menu__categories li a {
+  display: block;
+  padding: var(--space-2) var(--space-2);
+  font-size: var(--fs-body);
+  color: var(--ink);
+  border-radius: var(--r-input);
+}
+.mega-menu__categories li a:hover {
+  color: var(--red-deep);
+  background: var(--red-tint);
+}
+
+.mega-menu__footer {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule);
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+}
+.mega-menu__footer a {
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.mega-menu__footer a:hover {
+  color: var(--red-deep);
+  border-bottom-color: var(--red);
+}
+.mega-menu__view-all {
+  font-family: var(--font-secondary);
+  font-weight: var(--fw-medium);
+}
+
+/* ---- header actions: search, quote CTA, mobile toggle --------------------- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.header-search__label {
+  font-family: var(--font-secondary);
+  font-size: var(--fs-small);
+  color: var(--ink-2);
+}
+.header-search__input {
+  width: 160px;
+  height: 36px;
+  padding-inline: var(--space-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-input);
+  background: var(--surface);
+  font-size: var(--fs-small);
+  color: var(--ink);
+}
+.header-search__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--target-min);
+  height: var(--target-min);
+  color: var(--ink-2);
+  border-radius: var(--r-input);
+}
+.header-search__submit:hover { color: var(--red-deep); }
+
+.header-mobile-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--target-min);
+  height: var(--target-min);
+  border-radius: var(--r-input);
+}
+.header-mobile-toggle__bar {
+  position: relative;
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--ink);
+}
+.header-mobile-toggle__bar::before,
+.header-mobile-toggle__bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background: var(--ink);
+}
+.header-mobile-toggle__bar::before { top: -4px; }
+.header-mobile-toggle__bar::after { top: 4px; }
+
+/* ---- mobile nav panel — full screen, 48px rows, CTA pinned bottom --------- */
+.mobile-nav[hidden] { display: none; }
+.mobile-nav:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: var(--surface-2);
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity var(--t-standard) var(--ease-standard),
+              transform var(--t-standard) var(--ease-standard);
+}
+.mobile-nav.is-open {
+  opacity: 1;
+  transform: none;
+}
+
+.mobile-nav__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--gutter);
+  border-bottom: 1px solid var(--rule);
+}
+.mobile-nav__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--target-min);
+  height: var(--target-min);
+  color: var(--ink);
+}
+
+.mobile-nav__list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4) var(--gutter);
+}
+.mobile-nav__list li {
+  border-bottom: 1px solid var(--rule);
+}
+.mobile-nav__list a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  font-family: var(--font-secondary);
+  font-size: var(--fs-body-l);
+  font-weight: var(--fw-medium);
+  color: var(--ink);
+}
+.mobile-nav__list a:hover { color: var(--red-deep); }
+
+.mobile-nav__footer {
+  padding: var(--space-4) var(--gutter) var(--space-6);
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.mobile-nav__phone {
+  font-size: var(--fs-body);
+  color: var(--ink-2);
+}
+.mobile-nav__cta { width: 100%; }
+
+/* The full desktop nav (mega-menus + search + persistent quote CTA) needs
+   more room than it has at 1024px in this container — 1024 sits in a
+   tablet zone in this design system's own grid (nothing about grid-12
+   or .container treats 1024 as "desktop" the way 1280/1440 do), so the
+   mobile/hamburger pattern carries through to the same 1280px threshold
+   the container uses. */
+@media (max-width: 1279px) {
+  .header-nav,
+  .header-search,
+  .header-quote-btn { display: none; }
+  .header-mobile-toggle { display: inline-flex; }
+}
+
+@media (min-width: 1280px) {
+  .mobile-nav { display: none !important; }
+}
+
+/* ============================================================================
+   3 · Quote drawer — closes 1.3, 2.6
+   Invoked from anywhere via window.HaskoQuote.open(). Every field carries a
+   visible <label>. Honeypot plus a 3-second timing check stand in for
+   reCAPTCHA (audit 2.6 — reCAPTCHA adds friction and its own a11y cost).
+   ========================================================================= */
+.quote-drawer[hidden] { display: none; }
+.quote-drawer:not([hidden]) {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+}
+
+.quote-drawer__backdrop {
+  position: absolute;
+  inset: 0;
+  background: color-mix(in srgb, var(--ink) 50%, transparent);
+  opacity: 0;
+  transition: opacity var(--t-standard) var(--ease-standard);
+}
+.quote-drawer.is-open .quote-drawer__backdrop { opacity: 1; }
+
+.quote-drawer__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(480px, 100%);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-drawer);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform var(--t-standard) var(--ease-standard);
+}
+.quote-drawer.is-open .quote-drawer__panel { transform: translateX(0); }
+
+.quote-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-6);
+  border-bottom: 1px solid var(--rule);
+}
+.quote-drawer__title { font-size: var(--fs-h3); }
+.quote-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--target-min);
+  height: var(--target-min);
+  color: var(--ink-2);
+  border-radius: var(--r-input);
+}
+.quote-drawer__close:hover { color: var(--red-deep); }
+
+.quote-drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-6);
+}
+
+.quote-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+.quote-form__field label {
+  font-family: var(--font-secondary);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--ink-2);
+}
+.quote-form__optional { color: var(--ink-2); font-weight: var(--fw-regular); } /* --ink-3 is 3.4:1 — legal for large/non-text only, not this 14px label */
+
+.quote-form__field input,
+.quote-form__field select,
+.quote-form__field textarea {
+  min-height: var(--target-min);
+  padding: var(--space-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-input);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: var(--fs-body);
+}
+.quote-form__field textarea { min-height: 96px; resize: vertical; }
+.quote-form__field input:focus-visible,
+.quote-form__field select:focus-visible,
+.quote-form__field textarea:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+.quote-form__honeypot {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.quote-form__error {
+  margin-bottom: var(--space-4);
+  padding: var(--space-3);
+  border-radius: var(--r-input);
+  background: var(--red-tint);
+  color: var(--red-ink);
+  font-size: var(--fs-small);
+}
+
+.quote-form__submit { width: 100%; margin-top: var(--space-2); }
+
+.quote-form__success {
+  padding: var(--space-6) 0;
+}
+.quote-form__success p {
+  font-size: var(--fs-body-l);
+  color: var(--ink);
+  margin-bottom: var(--space-6);
+}
+
+.quote-drawer-open { overflow: hidden; }
+
+/* ============================================================================
+   16 · Footer — closes 3.1, 3.8
+   --steel dark band, .on-dark applied. Four real <nav> groups with visible
+   headings, then address, phone, email, associations, social, copyright.
+   No Google+ — dead since April 2019 (audit 3.1).
+   ========================================================================= */
+.site-footer {
+  padding-block: var(--section-y) var(--space-8);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  gap: var(--space-8);
+  padding-bottom: var(--space-12);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.footer-brand__logo { height: 30px; width: auto; }
+.footer-brand__tagline {
+  font-size: var(--fs-small);
+  letter-spacing: var(--tr-index);
+  color: var(--on-steel-2);
+}
+
+.footer-nav__heading {
+  font-family: var(--font-secondary);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--tr-index);
+  text-transform: uppercase;
+  color: var(--on-steel);
+  margin-bottom: var(--space-4);
+}
+.footer-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.footer-nav a,
+.footer-nav__link-button {
+  display: inline-block;
+  font-family: var(--font-secondary);
+  font-size: var(--fs-small);
+  color: var(--on-steel-2);
+  text-align: left;
+  padding-block: var(--space-1);
+}
+.footer-nav a:hover,
+.footer-nav__link-button:hover { color: var(--on-steel); }
+.footer-nav__link-button { min-height: var(--target-min); }
+.footer-nav__view-all { color: var(--red-light); font-weight: var(--fw-medium); }
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.footer-bottom__address {
+  max-width: 420px;
+  font-size: var(--fs-small);
+  color: var(--on-steel-2);
+}
+.footer-bottom__address a {
+  color: var(--on-steel);
+  border-bottom: 1px solid var(--rule-dark);
+}
+.footer-bottom__address a:hover { color: var(--red-light); }
+
+.footer-mark {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--r-input);
+  font-size: var(--fs-small);
+  color: var(--on-steel-2);
+}
+
+.footer-bottom__social {
+  display: flex;
+  gap: var(--space-2);
+  margin-inline-start: auto;
+}
+.footer-bottom__social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--target-min);
+  height: var(--target-min);
+  color: var(--on-steel-2);
+  border-radius: var(--r-input);
+}
+.footer-bottom__social a:hover { color: var(--red-light); }
+
+.footer-bottom__legal {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--fs-small);
+  color: var(--on-steel-3);
+}
+.footer-bottom__legal p { display: flex; align-items: center; min-height: var(--target-min); }
+.footer-bottom__legal a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  color: var(--on-steel-2);
+  border-bottom: 1px solid var(--rule-dark);
+}
+.footer-bottom__legal a:hover { color: var(--on-steel); }
+
+@media (max-width: 1023px) {
+  .footer-top { grid-template-columns: repeat(2, 1fr); }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 639px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom__social { margin-inline-start: 0; }
+}
