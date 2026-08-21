@@ -15,3 +15,255 @@
      04  Machine finder          11  Contact
      05  Integrated lines        12  Footer
    ========================================================================= */
+
+/* ============================================================================
+   01 · Hero — closes audit 1.4, convention 1
+   No carousel: one composed frame. `.hero` carries `.on-dark` (tokens.css
+   swaps --focus and --red for the dark-band-safe steps automatically, so
+   var(--red) below already resolves to --red-light here).
+
+   Below 1024px: compact stacked column, min-height:100svh — the hard
+   responsive-check.mjs constraint at the 390px breakpoint. The machine
+   visual moves to a separate element AFTER this section (.hero-mobile-band)
+   so it never counts toward that measurement; the wireframe's own divider
+   between the "100svh box" and the "image box" is exactly this: two
+   stacked, independently-sized boxes.
+
+   1024px+: side-by-side, min-height:max(720px,88vh). The blueprint texture
+   and machine visual are position:absolute, so they never add to `.hero`'s
+   own flow height at any breakpoint — .hero__inner is also position:
+   relative (z-index:auto) purely so it paints above those two absolute
+   layers; without it, any positioned element paints above in-flow content
+   regardless of DOM order and the text would sit under the artwork.
+   ========================================================================= */
+.hero {
+  /* min-height is 100svh MINUS the sticky header's own rendered height,
+     not a plain 100svh. The header sits in normal flow above the hero
+     (sticky only changes its behaviour on scroll, not its initial
+     layout position), so on a short mobile viewport a plain `100svh`
+     hero would push its own bottom edge — the proof strip — below the
+     actual visible screen even though the hero element's own height
+     never itself exceeds 100svh. --space-32 (128px) is a deliberate
+     overshoot of the header's measured ~121px height at mobile (44px
+     utility row + ~77px primary row): safe if the header renders a few
+     px taller under font-fallback, and still a real token rather than
+     an arbitrary magic number. */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--space-32));   /* svh fallback below */
+  min-height: calc(100svh - var(--space-32));
+}
+
+.hero.on-dark {
+  /* Longhand, not the `background` shorthand — the shorthand resets
+     background-color to transparent, and the a11y/contrast verifiers
+     read backgroundColor specifically (they don't resolve background-
+     image gradients), so a shorthand-only gradient here reads as "no
+     background" and the checker falls through to the page's light
+     --surface colour when scoring contrast on every line in the hero. */
+  background-color: var(--steel);
+  background-image: radial-gradient(120% 140% at 12% 0%, var(--steel-2) 0%, var(--steel) 62%);
+}
+
+/* ---- decorative layers — position:absolute, excluded from flow height --- */
+.hero__blueprint {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 46%;
+  height: 56%;
+  color: var(--on-steel);
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.hero__visual {
+  display: none;
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: 52%;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-16);
+  background: var(--steel-2);
+  border-left: 1px solid var(--rule-dark);
+  color: var(--on-steel-3);
+}
+.hero__visual svg {
+  width: 60%;
+  height: auto;
+  max-height: 80%;
+}
+
+/* ---- content ------------------------------------------------------------- */
+.hero__inner {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding-block: var(--space-16) var(--space-6);
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.hero__eyebrow {
+  /* --fs-index (11px) is below the 14px floor both verifiers enforce on
+     any rendered text node — Task 1 hit the same conflict for the header
+     utility badges (see css/components.css .header-utility__badges) and
+     resolved it the same way: --fs-small (14px) for short mono badge
+     copy, reserving --fs-index for true index markers like "( 01 )" that
+     never stand alone as the only visible instance of a string. */
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tr-index);
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0;
+}
+
+.hero__headline {
+  margin: 0;
+  max-width: 11ch;
+}
+
+.hero__standfirst {
+  margin: var(--space-2) 0 0;
+  max-width: 46ch;
+  font-size: var(--fs-body);   /* --fs-body-l (18px) from 1024px up — see media query below */
+  color: var(--on-steel-2);
+}
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.hero__ctas .btn { width: 100%; }
+
+/* ---- primary CTA — native <details>/<summary> disclosure -----------------
+   Works with JS disabled: the four application links are real anchors,
+   always in the DOM. js/motion.js only adds Escape-to-close and click-
+   outside-to-close on top of the native open/close behaviour. */
+.hero-select { position: relative; }
+
+.hero-select__trigger {
+  display: inline-flex;
+  list-style: none;
+  cursor: pointer;
+}
+.hero-select__trigger::-webkit-details-marker { display: none; }
+.hero-select__trigger::marker { content: ""; }
+
+.hero-select__caret {
+  display: inline-block;
+  transition: transform var(--t-micro) var(--ease-standard);
+}
+.hero-select[open] .hero-select__caret { transform: rotate(180deg); }
+
+.hero-select__panel {
+  position: absolute;
+  top: calc(100% + var(--space-3));
+  left: 0;
+  z-index: 20;
+  min-width: 240px;
+  padding: var(--space-2);
+  background: var(--surface-2);
+  border: 1px solid var(--rule);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-raised);
+}
+.hero-select__panel li + li { margin-top: var(--space-1); }
+.hero-select__panel a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--r-input);
+  font-family: var(--font-secondary);
+  font-size: var(--fs-ui);
+  color: var(--ink);
+}
+.hero-select__panel a:hover,
+.hero-select__panel a:focus-visible {
+  background: var(--red-tint);
+  color: var(--red-ink);
+}
+
+/* ---- proof strip -----------------------------------------------------
+   96 YEARS · 21 MACHINES · 25-YEAR SERVICE LIFE · MADE IN SODDY-DAISY, TN.
+   Three of the four carry a numeric [data-count-to] span (96, 21, 25);
+   "MADE IN SODDY-DAISY, TN" has no number in it and renders statically —
+   rendered as one literal string per CLAUDE.md §6's "Copy, final" block,
+   not paraphrased into a figure/caption pair. */
+.hero__proof {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3) var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule-dark);
+}
+@media (min-width: 600px) {
+  .hero__proof { grid-template-columns: repeat(4, 1fr); }
+}
+
+.hero__proof-item {
+  font-size: var(--fs-small);   /* --fs-body-l (18px) from 1024px up — see media query below */
+  color: var(--on-steel-2);
+  letter-spacing: var(--tr-index);
+}
+.hero__proof-item span[data-count-to] {
+  color: var(--on-steel);
+  font-weight: var(--fw-medium);
+}
+
+/* ---- mobile/tablet machine band, below 1024px -----------------------
+   Structurally a sibling of <section class="hero">, not a child of it —
+   see the hero comment above for why. */
+.hero-mobile-band {
+  aspect-ratio: 16 / 9;
+  background: var(--steel-2);
+  color: var(--on-steel-3);
+  overflow: hidden;
+}
+.hero-mobile-band svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- 1024px+ — side-by-side bleed layout ------------------------------ */
+@media (min-width: 1024px) {
+  .hero {
+    min-height: 720px;
+    min-height: max(720px, 88vh);
+  }
+  .hero__visual { display: flex; }
+  .hero__content { max-width: 34ch; }
+  .hero__standfirst { font-size: var(--fs-body-l); }
+  .hero__ctas { flex-wrap: nowrap; }
+  .hero__ctas .btn { width: auto; }
+  .hero__inner { gap: var(--space-16); padding-block: var(--space-24) var(--space-8); }
+  .hero__proof {
+    /* auto columns, not equal 1fr columns — "25-YEAR SERVICE LIFE" and
+       "MADE IN SODDY-DAISY, TN" are long enough that a narrow equal
+       column wraps them to three lines; auto-sized columns give each
+       item exactly the width its own text needs. */
+    grid-template-columns: repeat(4, auto);
+    max-width: none;
+    column-gap: var(--space-12);
+    row-gap: var(--space-4);
+    padding-top: var(--space-6);
+  }
+  .hero__proof-item { font-size: var(--fs-body-l); }
+  .hero-mobile-band { display: none; }
+}

@@ -52,6 +52,16 @@
 }
 .btn--secondary:hover { border-color: var(--ink); }
 
+/* .on-dark only swaps --focus and --red (tokens.css) — --ink itself stays
+   near-black, so a plain .btn--secondary on a dark band (hero, 05
+   integrated lines, footer) renders near-invisible text-on-steel unless
+   it's re-pointed at the on-steel tokens here. */
+.on-dark .btn--secondary {
+  color: var(--on-steel);
+  border-color: var(--rule-dark);
+}
+.on-dark .btn--secondary:hover { border-color: var(--on-steel); }
+
 /* ============================================================================
    2 · Header + mega-menu — closes 1.5, 2.1
    Two rows collapsing to one past 120px scroll. Nav links are --ink, never

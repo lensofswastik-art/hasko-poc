@@ -288,9 +288,143 @@ window.HaskoMotion = (function () {
     requestAnimationFrame(tick);
   }
 
+  /**
+   * Bulk-observes every [data-count-to] element (hero proof strip, later
+   * the section 06 proof stats) and fires the single-element countUp()
+   * once per element on entry, via IntersectionObserver.unobserve so it
+   * never re-fires. Static under reduced motion — and note every
+   * [data-count-to] element already carries its correct final number as
+   * literal markup (e.g. <span data-count-to="96">96</span>), so a page
+   * with JS disabled, or reduced motion before this ever runs, never
+   * shows "0": this function only ever re-triggers the animation on top
+   * of an already-correct value, it doesn't supply the value.
+   *
+   * Elements already on screen are fired via a direct
+   * getBoundingClientRect() check rather than waiting on the observer's
+   * first callback, AND that check runs twice — once immediately, once
+   * again after document.fonts.ready. The double-check matters: at the
+   * moment DOMContentLoaded fires, Instrument Sans/Geist/Geist Mono
+   * haven't loaded yet, so the hero renders in fallback system fonts,
+   * which measure taller — enough to push the proof strip a few pixels
+   * below a short viewport. An immediate-only check misjudges it as
+   * off-screen there; once the real fonts swap in (font-display:swap)
+   * the layout settles shorter and the strip is back on screen, which
+   * document.fonts.ready catches directly instead of waiting on the
+   * IntersectionObserver to eventually notice the reflow on its own. A
+   * `fired` set guards against the observer and either manual check
+   * both racing to fire the same element.
+   */
+  function initCountUp() {
+    const targets = document.querySelectorAll('[data-count-to]');
+    if (!targets.length) return;
+
+    if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => { el.textContent = el.dataset.countTo; });
+      return;
+    }
+
+    const fired = new Set();
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !fired.has(entry.target)) {
+            fired.add(entry.target);
+            countUp(entry.target, { duration: 900 });
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    function checkAndFire() {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      targets.forEach((el) => {
+        if (fired.has(el)) return;
+        const r = el.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < vh) {
+          fired.add(el);
+          countUp(el, { duration: 900 });
+          observer.unobserve(el);
+        }
+      });
+    }
+
+    targets.forEach((el) => observer.observe(el));
+    checkAndFire();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(checkAndFire);
+    }
+  }
+
+  /**
+   * Drifts every [data-parallax] element (the hero machine visual) up to
+   * 4% of its own height as it crosses the viewport, transform-only.
+   * Skips attaching the scroll listener at all under reduced motion —
+   * belt-and-braces alongside the `[data-parallax] { transform: none
+   * !important }` rule already in tokens.css, which is what actually
+   * guarantees the element renders at rest if this ever ran anyway.
+   */
+  function initParallax() {
+    const targets = document.querySelectorAll('[data-parallax]');
+    if (!targets.length || prefersReducedMotion()) return;
+
+    let ticking = false;
+
+    function update() {
+      const vh = window.innerHeight || 1;
+      targets.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+        const clamped = Math.max(-1, Math.min(1, progress));
+        const drift = clamped * (rect.height * 0.04);
+        el.style.transform = `translateY(${drift.toFixed(1)}px)`;
+      });
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /**
+   * Hero primary CTA (component-adjacent, closes 1.4 alongside the
+   * markup): a native <details data-hero-select>/<summary> disclosure
+   * already opens and closes with zero JS, and already exposes its state
+   * to assistive tech natively. This only layers on the two behaviours
+   * native <details> doesn't give you for free — Escape closes it and
+   * returns focus to the trigger, and a click outside closes it too.
+   */
+  function initHeroApplicationSelector() {
+    const details = document.querySelector('[data-hero-select]');
+    if (!details) return;
+
+    document.addEventListener('click', (e) => {
+      if (details.open && !details.contains(e.target)) details.removeAttribute('open');
+    });
+
+    details.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && details.open) {
+        details.removeAttribute('open');
+        const trigger = details.querySelector('summary');
+        if (trigger) trigger.focus();
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initReveal();
     initMobileNav();
+    initCountUp();
+    initParallax();
+    initHeroApplicationSelector();
   });
 
   return {
@@ -300,5 +434,8 @@ window.HaskoMotion = (function () {
     prefersReducedMotion,
     initStickyHeader,
     initMegaMenu,
+    initCountUp,
+    initParallax,
+    initHeroApplicationSelector,
   };
 })();
