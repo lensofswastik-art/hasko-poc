@@ -1,0 +1,182 @@
+/* ============================================================================
+   HASKO base — reset, fonts, layout primitives, reveal.
+   Values only ever come from css/tokens.css — nothing is hardcoded here.
+   ========================================================================= */
+
+/* ---- reset --------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, figure, blockquote, dl, dd,
+ul, ol {
+  margin: 0;
+}
+
+ul, ol {
+  padding: 0;
+  list-style: none;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---- fonts ----------------------------------------------------------------
+   Instrument Sans is primary, Geist is secondary, Geist Mono carries every
+   number a buyer reads as data. CDN link for the demo — self-host woff2
+   subsets before any real launch (CLAUDE.md §4).                            */
+
+/*
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400&family=Geist:wght@400..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+*/
+
+/* ---- document -------------------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-primary);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- headings -------------------------------------------------------------- */
+h1 {
+  font-family: var(--font-primary);
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-display);
+  line-height: var(--lh-display);
+}
+
+h2 {
+  font-family: var(--font-primary);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tr-h2);
+  line-height: var(--lh-heading);
+}
+
+h3 {
+  font-family: var(--font-primary);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semi);
+  letter-spacing: var(--tr-h3);
+  line-height: var(--lh-heading);
+}
+
+h4 {
+  font-family: var(--font-primary);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-semi);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+/* ---- numeric / data — Geist Mono, load-bearing ----------------------------
+   Every measurement, model code, capacity, part number, file size, result
+   count and section index uses this class or an element inheriting it.      */
+.mono,
+.figure,
+.spec-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- layout: 12-column grid ------------------------------------------------ */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--grid-gap);
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@media (min-width: 1024px) {
+  .grid-12 {
+    padding-inline: var(--gutter-md);
+  }
+}
+
+@media (min-width: 1440px) {
+  .grid-12 {
+    max-width: var(--container-wide);
+    padding-inline: var(--gutter-lg);
+  }
+}
+
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---- dark bands ------------------------------------------------------------
+   .on-dark flips --focus and --red (defined in tokens.css). Text colour on
+   a dark band is set per-component, but the base defaults keep it sane.     */
+.on-dark {
+  background: var(--steel);
+  color: var(--on-steel);
+}
+
+/* ---- reveal — scroll-entrance animation ------------------------------------
+   opacity 0→1 plus translateY(20px→0). Nothing else. Reduced-motion escape
+   is defined once, in tokens.css.                                           */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity var(--t-enter) var(--ease-pop),
+    transform var(--t-enter) var(--ease-pop);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- visually-hidden utility, for screen-reader-only text ------------------ */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

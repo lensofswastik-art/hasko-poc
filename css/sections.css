@@ -1,0 +1,17 @@
+/* ============================================================================
+   HASKO sections — section-specific layout only.
+   Section specs: .claude/skills/hasko-section-specs/references/sections.md
+   (superseded by CLAUDE.md §6 for copy and token names)
+   Values only ever come from css/tokens.css — nothing is hardcoded here.
+
+   Built section by section, per CLAUDE.md §14 working process. Empty until
+   the first section lands.
+
+     00  Announcement bar        06  Proof
+     --  Header                  07  Parts & service
+     01  Hero                    08  Why heavy-built
+     02  Trust strip             09  Automation
+     03  Industry paths          10  Resources
+     04  Machine finder          11  Contact
+     05  Integrated lines        12  Footer
+   ========================================================================= */

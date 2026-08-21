@@ -1,0 +1,126 @@
+/* ============================================================================
+   HASKO design tokens
+   The only place values are defined. Everything else references these.
+   Copy this file to css/tokens.css verbatim.
+   ========================================================================= */
+
+:root {
+  /* ---- neutrals ---- ratios measured against --surface #FBFAF8 ----------
+     BANNED: #62ACDA — 2.49:1, the site-wide failure this build fixes.
+     There is no blue in this system. The logo is red; so is the palette.  */
+  --ink:            #0E1116;   /* 16.9:1  primary text, dark sections      */
+  --ink-2:          #4A5058;   /*  7.4:1  body text, captions              */
+  --ink-3:          #878E97;   /*  3.4:1  muted — large/non-text ONLY      */
+  --surface:        #FBFAF8;   /* page background, warm off-white          */
+  --surface-2:      #FFFFFF;   /* cards                                    */
+  --surface-3:      #EFEDE8;   /* machine photography seamless             */
+  --steel:          #1A1F26;   /* dark sections, footer                    */
+  --steel-2:        #252B34;   /* cards on dark                            */
+  --rule:           #E2E0DA;   /* hairlines, dividers                      */
+  --rule-strong:    #C9C6BE;   /* link underlines, input borders           */
+  --on-steel:       #FFFFFF;
+  --on-steel-2:     rgba(255,255,255,.82);
+  --on-steel-3:     rgba(255,255,255,.56);
+  --rule-dark:      rgba(255,255,255,.16);
+
+  /* ---- the red ramp ---- one hue, ~358deg, taken from the logo ----------
+     Each step has one job. Using the wrong step is a contrast bug, not a
+     taste question — the measured ratio is on every line.                 */
+  --red-mark:       #FF0000;   /*  3.83:1  THE LOGO ONLY. Never text.
+                                  Never a fill with text on top.           */
+  --red:            #DB2128;   /*  4.73:1  brand accent on light: rules,
+                                  section indices, icons, underlines       */
+  --red-action:     #C41219;   /*  white label on it 6.09:1 — solid fills,
+                                  primary buttons                          */
+  --red-deep:       #A8161C;   /*  7.20:1  hover, pressed, red body text   */
+  --red-ink:        #8E1116;   /*  8.20:1 on --red-tint — text on tint     */
+  --red-light:      #FF6B6E;   /*  5.98:1 on --steel, 5.14:1 on --steel-2
+                                  the ONLY red for dark bands              */
+  --red-tint:       #FDECEC;   /*  selected chips, callouts. ink 16.6:1    */
+  --red-line:       #F7D9DA;   /*  hairline on --red-tint                  */
+
+  /* ---- status ---- never the only signal; always icon + label ---------- */
+  --good:           #1B7F4B;   /*  4.8:1  in stock, confirmed              */
+  --warn:           #B26A00;   /*  4.6:1  lead time, made to order         */
+
+  /* ---- type ------------------------------------------------------------ */
+  --font-primary:   "Instrument Sans", system-ui, -apple-system, sans-serif;
+  --font-secondary: "Geist", "Instrument Sans", system-ui, sans-serif;
+  --font-mono:      "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --fs-display: clamp(44px, 6vw, 86px);
+  --fs-h2:      clamp(30px, 3.8vw, 52px);
+  --fs-h3:      clamp(21px, 2.2vw, 28px);
+  --fs-h4:      18px;
+  --fs-body-l:  18px;
+  --fs-body:    16.5px;          /* never 14px — audit finding */
+  --fs-ui:      15px;
+  --fs-small:   14px;
+  --fs-spec:    14px;            /* mono */
+  --fs-index:   11px;            /* mono, uppercase */
+
+  --lh-display: 1.02;  --lh-heading: 1.15;  --lh-body: 1.65;  --lh-spec: 1.5;
+  --tr-display: -0.025em; --tr-h2: -0.02em; --tr-h3: -0.015em;
+  --tr-body: 0; --tr-index: 0.14em;
+  --fw-regular: 400; --fw-medium: 500; --fw-semi: 600; --fw-bold: 700;
+
+  /* ---- spacing — nothing between steps --------------------------------- */
+  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
+  --space-6: 24px;  --space-8: 32px;  --space-12: 48px; --space-16: 64px;
+  --space-24: 96px; --space-32: 128px; --space-40: 160px;
+  --section-y: var(--space-24);      /* mobile  */
+  --section-y-md: var(--space-32);   /* desktop */
+  --section-y-lg: var(--space-40);   /* major transitions */
+
+  /* ---- layout ---------------------------------------------------------- */
+  --container: 1280px; --container-wide: 1440px;
+  --gutter: 24px; --gutter-md: 40px; --gutter-lg: 64px; --grid-gap: 24px;
+
+  /* ---- radii ----------------------------------------------------------- */
+  --r-input: 4px; --r-card: 12px; --r-feature: 20px; --r-pill: 999px;
+
+  /* ---- elevation ------------------------------------------------------- */
+  --shadow-card:   0 2px 8px rgba(14,17,22,.04);
+  --shadow-raised: 0 16px 40px rgba(14,17,22,.08);
+  --shadow-drawer: 0 24px 64px rgba(14,17,22,.18);
+
+  /* ---- motion ---------------------------------------------------------- */
+  --ease-standard: cubic-bezier(.4,0,.2,1);
+  --ease-pop:      cubic-bezier(.2,.7,.3,1);
+  --ease-exit:     cubic-bezier(.4,0,1,1);
+  --t-micro: 160ms; --t-standard: 280ms; --t-enter: 680ms;
+  --t-exit: 200ms;  --t-reflow: 240ms;   --stagger: 70ms;
+
+  /* ---- focus & targets — never remove without replacing ----------------
+     Ink, not red. A red ring on a red button is invisible; ink measures
+     3.10:1 against --red-action, clearing 1.4.11 on the worst pairing.    */
+  --focus:      var(--ink);          /* 18.13:1 on --surface              */
+  --focus-ring: 2px solid var(--focus);
+  --focus-offset: 2px;
+  --target-min: 44px;
+}
+
+/* Dark bands flip two tokens and nothing else. */
+.on-dark {
+  --focus: #FFFFFF;                  /* 16.56:1 on --steel                */
+  --red:   var(--red-light);         /* --red at 3.36:1 on steel FAILS    */
+}
+
+/* Required. Every transform, transition and animation renders at final
+   state. Content must be VISIBLE, not hidden and not mid-transition.      */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  [data-parallax] { transform: none !important; }
+  .sticky-centre { position: static !important; }
+}
+
+:where(a,button,input,select,textarea,summary,[tabindex]):focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
