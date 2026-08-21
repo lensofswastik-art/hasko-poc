@@ -19,15 +19,22 @@ Full values in `references/tokens.css`. What you need to know at the point of us
 
 | Role | Token | Note |
 |---|---|---|
-| Brand mark, primary action | `--hasko-red` `#DB2128` | 4.93:1 on surface. **Action only, never body emphasis** |
-| Links, secondary action, data | `--blue` `#1C5CAB` | 6.9:1 |
+| Brand mark | `--red-mark` `#FF0000` | The logo only. **Never text, never a fill behind text** |
+| Primary action | `--red-action` fill, `#FFFFFF` label | 6.09:1. Hover/pressed → `--red-deep`, never a lightened red |
+| Section index, rule, icon, arrow | `--red` `#DB2128` | 4.73:1 — accent only, not body text |
+| Red text at body size | `--red-deep` `#A8161C` | 7.20:1 — `--red` has no margin at 16.5px |
+| Links | `--ink` + `--rule-strong` underline | Never colour alone (WCAG 1.4.1). Hover → `--red-deep` text, `--red` underline |
 | Body text | `--ink-2` `#4A5058` | 7.4:1 |
 | Muted labels | `--ink-3` `#878E97` | 3.4:1 — **large text and non-text only** |
-| Dark sections | `--steel` `#1A1F26` | |
+| Dark sections | `--steel` `#1A1F26` | Carries `.on-dark`, which swaps `--red` for `--red-light` |
+
+**There is no blue token in this system.** The logo is a two-colour mark — `#FF0000` on white, nothing else — so the interface is built entirely from that hue and the surrounding neutrals.
 
 **`#62ACDA` is banned.** It measures 2.49:1 on white against a 4.5:1 requirement and is the site-wide contrast failure this build exists to fix (audit 1.5). If you find it anywhere, it is a critical bug.
 
-Never place `--hasko-red` adjacent to `--good` without an icon or label — they sit close for red-green deficiency.
+**`--red-mark` is the logo and nothing else.** `#FF0000` is 3.83:1 on the page background and 4.00:1 under white — it fails AA as text in both directions. `color: #FF0000` anywhere in the stylesheet is a bug.
+
+Never place `--red-action` adjacent to `--good` without an icon or label — they measure 1.21:1 against each other, close for red-green deficiency.
 
 ## Type
 

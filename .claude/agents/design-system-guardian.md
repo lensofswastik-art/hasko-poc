@@ -38,7 +38,7 @@ node .claude/skills/hasko-design-system/scripts/validate-tokens.mjs
 Group by severity. Be specific — file, line, the offending value, the token that should replace it.
 
 ```
-CRITICAL   css/sections.css:142   color: #62ACDA        → var(--blue)  [audit 1.5]
+CRITICAL   css/sections.css:142   color: #62ACDA        → var(--ink) for text, var(--red-deep) for red text — no blue in this system  [audit 1.5]
 HIGH       css/components.css:88  padding: 22px         → var(--space-6) 24px
 MEDIUM     css/sections.css:301   transition: 350ms     → var(--t-standard) 280ms
 LOW        index.html:412         spec value not mono   → add .mono
