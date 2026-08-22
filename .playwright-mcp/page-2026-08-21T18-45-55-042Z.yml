@@ -1,0 +1,76 @@
+- generic [active] [ref=f7e1]:
+  - banner [ref=f7e3]:
+    - generic [ref=f7e4]:
+      - link "Hasko Since 1930" [ref=f7e5] [cursor=pointer]:
+        - /url: /
+        - img "Hasko" [ref=f7e6]
+        - generic [ref=f7e7]: Since 1930
+      - generic [ref=f7e9]:
+        - generic [ref=f7e10]: Booth 102
+        - generic [ref=f7e13]: Georgia World
+        - generic [ref=f7e16]: 25 - 28 Aug
+        - link "Book a Meeting" [ref=f7e19] [cursor=pointer]:
+          - /url: "#contact"
+      - link "Request a Quote" [ref=f7e21] [cursor=pointer]:
+        - /url: "#contact"
+    - generic [ref=f7e22]:
+      - navigation "Primary" [ref=f7e23]:
+        - link "Industries" [ref=f7e25] [cursor=pointer]:
+          - /url: "#industries"
+        - link "Machines" [ref=f7e29] [cursor=pointer]:
+          - /url: "#machine-finder"
+        - link "Automation" [ref=f7e33] [cursor=pointer]:
+          - /url: "#automation"
+        - link "Parts & Service" [ref=f7e35] [cursor=pointer]:
+          - /url: "#parts-service"
+        - link "About" [ref=f7e37] [cursor=pointer]:
+          - /url: "#why-heavy-built"
+      - generic [ref=f7e38]:
+        - button "Search" [ref=f7e39]
+        - link "423.648.5200" [ref=f7e42] [cursor=pointer]:
+          - /url: tel:+14236485200
+  - main [ref=f7e45]:
+    - generic [ref=f7e47]:
+      - generic [ref=f7e49]:
+        - heading "Machines that are still running in 25 years" [level=1] [ref=f7e51]: Machines that arestill running in25 years
+        - link "Browse all 21 machines" [ref=f7e52] [cursor=pointer]:
+          - /url: "#machine-finder"
+      - generic:
+        - generic "Hasko machinery in operation"
+    - generic [ref=f7e54]:
+      - generic [ref=f7e55]: 96 YEARS
+      - generic [ref=f7e56]: 25-YEAR SERVICE LIFE
+      - generic [ref=f7e57]: 21 MACHINES
+    - generic [ref=f7e59]:
+      - heading "Four production lines, one engineering approach" [level=2] [ref=f7e60]
+      - generic [ref=f7e62]:
+        - link "Solid & engineered flooring 7 MACHINES 400 FPM" [ref=f7e63] [cursor=pointer]:
+          - /url: "?application=flooring#machine-finder"
+          - generic [ref=f7e65]:
+            - paragraph [ref=f7e66]: Solid & engineered flooring
+            - generic [ref=f7e67]:
+              - generic [ref=f7e68]: 7 MACHINES
+              - generic [ref=f7e69]: 400 FPM
+        - link "Ripped products & rough mill 6 MACHINES 7,000 BF/HR" [ref=f7e70] [cursor=pointer]:
+          - /url: "?application=ripped-products#machine-finder"
+          - generic [ref=f7e72]:
+            - paragraph [ref=f7e73]: Ripped products & rough mill
+            - generic [ref=f7e74]:
+              - generic [ref=f7e75]: 6 MACHINES
+              - generic [ref=f7e76]: 7,000 BF/HR
+        - link "Dimensional wood, furn. & cabinetry 5 MACHINES SCAN-DRIVEN" [ref=f7e77] [cursor=pointer]:
+          - /url: "?application=dimensional-wood#machine-finder"
+          - generic [ref=f7e79]:
+            - paragraph [ref=f7e80]: Dimensional wood, furn. & cabinetry
+            - generic [ref=f7e81]:
+              - generic [ref=f7e82]: 5 MACHINES
+              - generic [ref=f7e83]: SCAN-DRIVEN
+        - link "Moulding & panelling 3 MACHINES HVY ARBORS" [ref=f7e84] [cursor=pointer]:
+          - /url: "?application=moulding#machine-finder"
+          - generic [ref=f7e86]:
+            - paragraph [ref=f7e87]: Moulding & panelling
+            - generic [ref=f7e88]:
+              - generic [ref=f7e89]: 3 MACHINES
+              - generic [ref=f7e90]: HVY ARBORS
+  - button "Open Next.js Dev Tools" [ref=f7e96] [cursor=pointer]
+  - alert [ref=f7e100]

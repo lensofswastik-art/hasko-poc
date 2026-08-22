@@ -1,0 +1,161 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]: Booth 102
+      - generic [ref=e7]: Georgia World
+      - generic [ref=e10]: 25 - 28 Aug
+      - link "Book a Meeting" [ref=e13] [cursor=pointer]:
+        - /url: "#contact"
+    - banner [ref=e14]:
+      - generic [ref=e15]:
+        - link "Hasko Since 1930" [ref=e16] [cursor=pointer]:
+          - /url: /
+          - img "Hasko" [ref=e17]
+          - generic [ref=e18]: Since 1930
+        - navigation "Primary" [ref=e19]:
+          - link "Industries" [ref=e21] [cursor=pointer]:
+            - /url: "#industries"
+          - link "Machines" [ref=e25] [cursor=pointer]:
+            - /url: "#machine-finder"
+          - link "Automation" [ref=e29] [cursor=pointer]:
+            - /url: "#automation"
+          - link "Parts & Service" [ref=e31] [cursor=pointer]:
+            - /url: "#parts-service"
+          - link "About" [ref=e33] [cursor=pointer]:
+            - /url: "#why-heavy-built"
+        - generic [ref=e34]:
+          - button "Search" [ref=e35]
+          - link "423.648.5200" [ref=e38] [cursor=pointer]:
+            - /url: tel:+14236485200
+          - link "Request a Quote" [ref=e41] [cursor=pointer]:
+            - /url: "#contact"
+  - main [ref=e42]:
+    - generic [ref=e44]:
+      - generic [ref=e46]:
+        - heading "Machines that are still running in 25 years" [level=1] [ref=e47]: Machines that arestill running in25 years
+        - paragraph [ref=e48]: Hasko builds heavy-duty machinery for solid and engineered flooring, rough mills, moulding and dimensional wood.
+        - generic [ref=e49]:
+          - group [ref=e50]:
+            - generic "Find machines for my application" [ref=e51] [cursor=pointer]:
+              - text: Find machines for my application
+              - generic [ref=e52]: ▾
+          - link "Browse all 21 machines" [ref=e53] [cursor=pointer]:
+            - /url: "#machine-finder"
+      - generic:
+        - generic "Hasko machinery in operation"
+    - generic [ref=e55]:
+      - generic [ref=e56]: 96 YEARS
+      - generic [ref=e57]: 25-YEAR SERVICE LIFE
+      - generic [ref=e58]: 21 MACHINES
+    - generic [ref=e60]:
+      - heading "Four production lines, one engineering approach" [level=2] [ref=e61]
+      - generic [ref=e62]:
+        - link "Solid & engineered flooring 7 MACHINES 400 FPM" [ref=e63] [cursor=pointer]:
+          - /url: "?application=flooring#machine-finder"
+          - generic [ref=e65]:
+            - paragraph [ref=e66]: Solid & engineered flooring
+            - generic [ref=e67]:
+              - generic [ref=e68]: 7 MACHINES
+              - generic [ref=e69]: 400 FPM
+        - link "Ripped products & rough mill 6 MACHINES 7,000 BF/HR" [ref=e70] [cursor=pointer]:
+          - /url: "?application=ripped-products#machine-finder"
+          - generic [ref=e72]:
+            - paragraph [ref=e73]: Ripped products & rough mill
+            - generic [ref=e74]:
+              - generic [ref=e75]: 6 MACHINES
+              - generic [ref=e76]: 7,000 BF/HR
+        - link "Dimensional wood, furn. & cabinetry 5 MACHINES SCAN-DRIVEN" [ref=e77] [cursor=pointer]:
+          - /url: "?application=dimensional-wood#machine-finder"
+          - generic [ref=e79]:
+            - paragraph [ref=e80]: Dimensional wood, furn. & cabinetry
+            - generic [ref=e81]:
+              - generic [ref=e82]: 5 MACHINES
+              - generic [ref=e83]: SCAN-DRIVEN
+        - link "Moulding & panelling 3 MACHINES HVY ARBORS" [ref=e84] [cursor=pointer]:
+          - /url: "?application=moulding#machine-finder"
+          - generic [ref=e86]:
+            - paragraph [ref=e87]: Moulding & panelling
+            - generic [ref=e88]:
+              - generic [ref=e89]: 3 MACHINES
+              - generic [ref=e90]: HVY ARBORS
+    - generic [ref=e92]:
+      - generic [ref=e93]:
+        - generic [ref=e94]:
+          - generic [ref=e95]: Application
+          - combobox "Application" [ref=e96]:
+            - option "Application" [selected]
+            - option "Flooring"
+            - option "Ripped products"
+            - option "Dimensional wood"
+            - option "Moulding"
+          - generic [ref=e97]: ▾
+        - generic [ref=e98]:
+          - generic [ref=e99]: Process
+          - combobox "Process" [ref=e100]:
+            - option "Process" [selected]
+            - option "Ripping"
+            - option "Chopping"
+            - option "Matching"
+            - option "Planing"
+            - option "Scanning"
+            - option "Feeding"
+            - option "Material handling"
+          - generic [ref=e101]: ▾
+        - generic [ref=e102]:
+          - generic [ref=e103]: Width
+          - combobox "Width" [ref=e104]:
+            - option "Width" [selected]
+            - option "< 12\""
+            - option "12–24\""
+            - option "24–36\""
+            - option "36\"+"
+          - generic [ref=e105]: ▾
+        - generic [ref=e106]:
+          - generic [ref=e107]: HP
+          - combobox "HP" [ref=e108]:
+            - option "HP" [selected]
+            - option "< 50"
+            - option "50–100"
+            - option "100–150"
+            - option "150+"
+          - generic [ref=e109]: ▾
+        - generic [ref=e110]:
+          - generic [ref=e113]: Search machines
+          - searchbox "Search machines" [ref=e114]
+      - heading "Find the machine that fits your line" [level=2] [ref=e115]
+      - paragraph [ref=e116]:
+        - text: SHOWING
+        - generic [ref=e117]: 1–3 OF 21
+        - text: MACHINES
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - img "Package Breakdown and Unscrambler (HSBU) — photo not yet available" [ref=e121]:
+            - generic [ref=e122]: Placeholder
+          - generic [ref=e123]:
+            - paragraph [ref=e124]: Package Breakdown and Unscrambler
+            - generic [ref=e125]: HSBU
+          - paragraph [ref=e126]: Line infeedPlaceholder
+          - link "View Spec" [ref=e127] [cursor=pointer]:
+            - /url: /machines/package-breakdown-and-unscrambler
+        - generic [ref=e128]:
+          - img "Strip Surfacing System for Scanning (FXP-EF) — photo not yet available" [ref=e130]:
+            - generic [ref=e131]: Placeholder
+          - generic [ref=e132]:
+            - paragraph [ref=e133]: Strip Surfacing System for Scanning
+            - generic [ref=e134]: FXP-EF
+          - paragraph [ref=e135]: Scan-readyPlaceholder
+          - link "View Spec" [ref=e136] [cursor=pointer]:
+            - /url: /machines/strip-surfacing-system-for-scanning
+        - generic [ref=e137]:
+          - img "StripMaster Pre-Surfacer (FSP-EF)" [ref=e139]
+          - generic [ref=e140]:
+            - paragraph [ref=e141]: StripMaster Pre-Surfacer
+            - generic [ref=e142]: FSP-EF
+          - paragraph [ref=e143]: Strip feed · scan-readyPlaceholder
+          - link "View Spec" [ref=e144] [cursor=pointer]:
+            - /url: /machines/stripmaster-pre-surfacer
+      - generic [ref=e145]:
+        - button "Previous page" [disabled] [ref=e146]
+        - button "Next page" [ref=e149]
+  - button "Open Next.js Dev Tools" [ref=e157] [cursor=pointer]
+  - alert [ref=e161]

@@ -1,0 +1,139 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - list [ref=e5]:
+        - listitem [ref=e6]: SINCE 1930
+        - listitem [ref=e7]: ·MADE IN THE USA
+      - list [ref=e8]:
+        - listitem [ref=e9]:
+          - link "423.648.5200" [ref=e10] [cursor=pointer]:
+            - /url: tel:+14236485200
+        - listitem [ref=e12]:
+          - link "Parts" [ref=e13] [cursor=pointer]:
+            - /url: index.html#parts-service
+        - listitem [ref=e14]:
+          - link "Contact" [ref=e15] [cursor=pointer]:
+            - /url: index.html#contact
+    - generic [ref=e17]:
+      - link "HASKO home" [ref=e18] [cursor=pointer]:
+        - /url: index.html
+        - img "HASKO" [ref=e19]
+      - button "Open menu" [ref=e21] [cursor=pointer]
+  - contentinfo [ref=e23]:
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - link "HASKO home" [ref=e26] [cursor=pointer]:
+          - /url: index.html
+          - img "HASKO" [ref=e27]
+        - paragraph [ref=e28]: HEAVY-BUILT PERFORMANCE · SINCE 1930
+      - navigation [ref=e29]:
+        - heading "Machines" [level=3] [ref=e30]
+        - list [ref=e31]:
+          - listitem [ref=e32]:
+            - link "Board ripping" [ref=e33] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e34]:
+            - link "Side matching" [ref=e35] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e36]:
+            - link "End matching" [ref=e37] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e38]:
+            - link "Planing & surfacing" [ref=e39] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e40]:
+            - link "Chopping" [ref=e41] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e42]:
+            - link "Scanning & optimizing" [ref=e43] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e44]:
+            - link "Feeding systems" [ref=e45] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e46]:
+            - link "Short stock feeding" [ref=e47] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e48]:
+            - link "Material handling" [ref=e49] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e50]:
+            - link "Special machines" [ref=e51] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e52]:
+            - link "Used machinery" [ref=e53] [cursor=pointer]:
+              - /url: index.html#machine-finder
+          - listitem [ref=e54]:
+            - link "View all 21 →" [ref=e55] [cursor=pointer]:
+              - /url: index.html#machine-finder
+      - navigation [ref=e56]:
+        - heading "Industries" [level=3] [ref=e57]
+        - list [ref=e58]:
+          - listitem [ref=e59]:
+            - link "Flooring" [ref=e60] [cursor=pointer]:
+              - /url: index.html#industries
+          - listitem [ref=e61]:
+            - link "Ripped products" [ref=e62] [cursor=pointer]:
+              - /url: index.html#industries
+          - listitem [ref=e63]:
+            - link "Dimensional wood" [ref=e64] [cursor=pointer]:
+              - /url: index.html#industries
+          - listitem [ref=e65]:
+            - link "Moulding" [ref=e66] [cursor=pointer]:
+              - /url: index.html#industries
+      - navigation [ref=e67]:
+        - heading "Company" [level=3] [ref=e68]
+        - list [ref=e69]:
+          - listitem [ref=e70]:
+            - link "About Hasko" [ref=e71] [cursor=pointer]:
+              - /url: index.html#why-heavy-built
+          - listitem [ref=e72]:
+            - link "Careers" [ref=e73] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e74]:
+            - link "News" [ref=e75] [cursor=pointer]:
+              - /url: "#"
+          - listitem [ref=e76]:
+            - link "Contract manufacturing" [ref=e77] [cursor=pointer]:
+              - /url: "#"
+      - navigation [ref=e78]:
+        - heading "Support" [level=3] [ref=e79]
+        - list [ref=e80]:
+          - listitem [ref=e81]:
+            - link "Parts & Service" [ref=e82] [cursor=pointer]:
+              - /url: index.html#parts-service
+          - listitem [ref=e83]:
+            - button "Request a quote" [ref=e84] [cursor=pointer]
+          - listitem [ref=e85]:
+            - link "Resources" [ref=e86] [cursor=pointer]:
+              - /url: index.html#resources
+          - listitem [ref=e87]:
+            - link "Contact" [ref=e88] [cursor=pointer]:
+              - /url: index.html#contact
+    - generic [ref=e89]:
+      - paragraph [ref=e90]:
+        - text: HASKO Inc. · Soddy-Daisy, TN ·
+        - link "423.648.5200" [ref=e91] [cursor=pointer]:
+          - /url: tel:+14236485200
+        - text: ·
+        - link "hello@haskomachines.com" [ref=e92] [cursor=pointer]:
+          - /url: mailto:hello@haskomachines.com
+      - generic [ref=e93]: WMMA
+      - list "HASKO on social media" [ref=e95]:
+        - listitem [ref=e96]:
+          - link "HASKO on LinkedIn" [ref=e97] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=e100]:
+          - link "HASKO on Instagram" [ref=e101] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=e104]:
+          - link "HASKO on Facebook" [ref=e105] [cursor=pointer]:
+            - /url: "#"
+        - listitem [ref=e108]:
+          - link "HASKO on YouTube" [ref=e109] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=e112]:
+        - paragraph [ref=e113]: © 2026 HASKO Inc.
+        - link "Privacy" [ref=e114] [cursor=pointer]:
+          - /url: "#"
+        - link "Accessibility statement" [ref=e115] [cursor=pointer]:
+          - /url: "#"
