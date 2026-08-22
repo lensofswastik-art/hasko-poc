@@ -24,7 +24,7 @@ export function AnnouncementBar({ full = false }: { full?: boolean }) {
     >
       <div className={full ? "flex items-center gap-3" : "contents"}>
         <span>
-          <Image src="/iwf.png" alt="IWF 2026" height={10} width={10} className="h-10 w-auto" />
+          <Image src="/IWF.png" alt="IWF 2026" height={10} width={10} className="h-10 w-auto" />
         </span>
         <span className={`flex items-center gap-1.5 whitespace-nowrap ${full ? "hidden min-[420px]:flex" : "hidden sm:flex"}`}>
           <Storefront size={16} weight="fill" className="shrink-0" />
