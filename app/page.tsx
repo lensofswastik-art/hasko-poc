@@ -5,6 +5,7 @@ import { StatsStrip } from "@/components/stats-strip";
 import { IndustrySection } from "@/components/industry-section";
 import { MachineFinder } from "@/components/machine-finder";
 import { IntegratedLines } from "@/components/integrated-lines";
+import { Proof } from "@/components/proof";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
           <MachineFinder />
         </Suspense>
         <IntegratedLines />
+        <Proof />
       </main>
     </>
   );
