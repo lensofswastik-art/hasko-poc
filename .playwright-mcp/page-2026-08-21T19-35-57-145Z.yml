@@ -1,0 +1,154 @@
+- generic [active] [ref=f20e1]:
+  - banner [ref=f20e3]:
+    - generic [ref=f20e5]:
+      - generic [ref=f20e6]:
+        - generic [ref=f20e7]: Booth 102
+        - generic [ref=f20e10]: 25 - 28 Aug
+      - link "Book a Meeting" [ref=f20e13] [cursor=pointer]:
+        - /url: "#contact"
+    - generic [ref=f20e14]:
+      - link "Hasko Since 1930" [ref=f20e15] [cursor=pointer]:
+        - /url: /
+        - img "Hasko" [ref=f20e16]
+        - generic [ref=f20e17]: Since 1930
+      - button "Open menu" [ref=f20e18]
+  - main [ref=f20e21]:
+    - generic [ref=f20e23]:
+      - generic [ref=f20e25]:
+        - heading "Machines that are still running in 25 years" [level=1] [ref=f20e27]: Machines that arestill running in25 years
+        - link "Browse all 21 machines" [ref=f20e28] [cursor=pointer]:
+          - /url: "#machine-finder"
+      - generic "Hasko machinery in operation" [ref=f20e30]
+    - generic [ref=f20e33]:
+      - generic [ref=f20e34]:
+        - generic [ref=f20e35]: 96 YEARS
+        - generic [ref=f20e36]: 25-YEAR SERVICE LIFE
+        - generic [ref=f20e37]: 21 MACHINES
+      - generic [ref=f20e38]:
+        - generic [ref=f20e39]: 96 YEARS
+        - generic [ref=f20e40]: 25-YEAR SERVICE LIFE
+        - generic [ref=f20e41]: 21 MACHINES
+    - generic [ref=f20e43]:
+      - heading "Four production lines, one engineering approach" [level=2] [ref=f20e44]
+      - generic [ref=f20e46]:
+        - link "Solid & engineered flooring End matchers, side matchers, pre-surfacers and truck flooring lines. 7 MACHINES 400 FPM" [ref=f20e47] [cursor=pointer]:
+          - /url: "?application=flooring#machine-finder"
+          - generic [ref=f20e49]:
+            - generic [ref=f20e50]:
+              - paragraph [ref=f20e51]: Solid & engineered flooring
+              - paragraph [ref=f20e52]: End matchers, side matchers, pre-surfacers and truck flooring lines.
+            - generic [ref=f20e53]:
+              - generic [ref=f20e54]: 7 MACHINES
+              - generic [ref=f20e55]: 400 FPM
+        - link "Ripped products & rough mill Gang ripsaws, scan/rip lines and strip saws built to lift yield. 6 MACHINES 7,000 BF/HR" [ref=f20e56] [cursor=pointer]:
+          - /url: "?application=ripped-products#machine-finder"
+          - generic [ref=f20e58]:
+            - generic [ref=f20e59]:
+              - paragraph [ref=f20e60]: Ripped products & rough mill
+              - paragraph [ref=f20e61]: Gang ripsaws, scan/rip lines and strip saws built to lift yield.
+            - generic [ref=f20e62]:
+              - generic [ref=f20e63]: 6 MACHINES
+              - generic [ref=f20e64]: 7,000 BF/HR
+        - link "Dimensional wood, furn. & cabinetry Chopping, defect scanning and optimisation for components. 5 MACHINES SCAN-DRIVEN" [ref=f20e65] [cursor=pointer]:
+          - /url: "?application=dimensional-wood#machine-finder"
+          - generic [ref=f20e67]:
+            - generic [ref=f20e68]:
+              - paragraph [ref=f20e69]: Dimensional wood, furn. & cabinetry
+              - paragraph [ref=f20e70]: Chopping, defect scanning and optimisation for components.
+            - generic [ref=f20e71]:
+              - generic [ref=f20e72]: 5 MACHINES
+              - generic [ref=f20e73]: SCAN-DRIVEN
+        - link "Moulding & panelling Matchers, planers and surfacers for architectural profiles. 3 MACHINES HVY ARBORS" [ref=f20e74] [cursor=pointer]:
+          - /url: "?application=moulding#machine-finder"
+          - generic [ref=f20e76]:
+            - generic [ref=f20e77]:
+              - paragraph [ref=f20e78]: Moulding & panelling
+              - paragraph [ref=f20e79]: Matchers, planers and surfacers for architectural profiles.
+            - generic [ref=f20e80]:
+              - generic [ref=f20e81]: 3 MACHINES
+              - generic [ref=f20e82]: HVY ARBORS
+    - generic [ref=f20e83]:
+      - heading "Find the machine that fits your line" [level=2] [ref=f20e84]
+      - generic [ref=f20e85]:
+        - generic [ref=f20e86]:
+          - generic [ref=f20e87]: Application
+          - combobox "Application" [ref=f20e88]:
+            - option "Application" [selected]
+            - option "Flooring"
+            - option "Ripped products"
+            - option "Dimensional wood"
+            - option "Moulding"
+          - generic [ref=f20e89]: ▾
+        - generic [ref=f20e90]:
+          - generic [ref=f20e91]: Process
+          - combobox "Process" [ref=f20e92]:
+            - option "Process" [selected]
+            - option "Ripping"
+            - option "Chopping"
+            - option "Matching"
+            - option "Planing"
+            - option "Scanning"
+            - option "Feeding"
+            - option "Material handling"
+          - generic [ref=f20e93]: ▾
+        - generic [ref=f20e94]:
+          - generic [ref=f20e95]: Width
+          - combobox "Width" [ref=f20e96]:
+            - option "Width" [selected]
+            - option "< 12\""
+            - option "12–24\""
+            - option "24–36\""
+            - option "36\"+"
+          - generic [ref=f20e97]: ▾
+        - generic [ref=f20e98]:
+          - generic [ref=f20e99]: HP
+          - combobox "HP" [ref=f20e100]:
+            - option "HP" [selected]
+            - option "< 50"
+            - option "50–100"
+            - option "100–150"
+            - option "150+"
+          - generic [ref=f20e101]: ▾
+        - generic [ref=f20e102]:
+          - generic [ref=f20e105]: Search machines
+          - searchbox "Search machines" [ref=f20e106]
+      - generic [ref=f20e107]:
+        - paragraph [ref=f20e108]:
+          - text: SHOWING
+          - generic [ref=f20e109]: 1–3 OF 21
+          - text: MACHINES
+        - generic [ref=f20e110]:
+          - generic [ref=f20e111]:
+            - img "Package Breakdown and Unscrambler (HSBU) — photo not yet available" [ref=f20e113]:
+              - generic [ref=f20e114]: Placeholder
+            - generic [ref=f20e115]:
+              - paragraph [ref=f20e116]: Package Breakdown and Unscrambler
+              - generic [ref=f20e117]: HSBU
+            - generic [ref=f20e118]:
+              - paragraph [ref=f20e119]: Line infeedPlaceholder
+              - link "View Spec" [ref=f20e120] [cursor=pointer]:
+                - /url: /machines/package-breakdown-and-unscrambler
+          - generic [ref=f20e121]:
+            - img "Strip Surfacing System for Scanning (FXP-EF) — photo not yet available" [ref=f20e123]:
+              - generic [ref=f20e124]: Placeholder
+            - generic [ref=f20e125]:
+              - paragraph [ref=f20e126]: Strip Surfacing System for Scanning
+              - generic [ref=f20e127]: FXP-EF
+            - generic [ref=f20e128]:
+              - paragraph [ref=f20e129]: Scan-readyPlaceholder
+              - link "View Spec" [ref=f20e130] [cursor=pointer]:
+                - /url: /machines/strip-surfacing-system-for-scanning
+          - generic [ref=f20e131]:
+            - img "StripMaster Pre-Surfacer (FSP-EF)" [ref=f20e133]
+            - generic [ref=f20e134]:
+              - paragraph [ref=f20e135]: StripMaster Pre-Surfacer
+              - generic [ref=f20e136]: FSP-EF
+            - generic [ref=f20e137]:
+              - paragraph [ref=f20e138]: Strip feed · scan-readyPlaceholder
+              - link "View Spec" [ref=f20e139] [cursor=pointer]:
+                - /url: /machines/stripmaster-pre-surfacer
+        - generic [ref=f20e140]:
+          - button "Previous page" [disabled] [ref=f20e141]
+          - button "Next page" [ref=f20e144]
+  - button "Open Next.js Dev Tools" [ref=f20e152] [cursor=pointer]
+  - alert [ref=f20e156]

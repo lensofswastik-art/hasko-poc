@@ -1,0 +1,68 @@
+- generic [active] [ref=f16e1]:
+  - banner [ref=f16e3]:
+    - generic [ref=f16e5]:
+      - generic [ref=f16e6]:
+        - generic [ref=f16e7]: Booth 102
+        - generic [ref=f16e10]: Georgia World
+        - generic [ref=f16e13]: 25 - 28 Aug
+      - link "Book a Meeting" [ref=f16e16] [cursor=pointer]:
+        - /url: "#contact"
+    - generic [ref=f16e17]:
+      - link "Hasko Since 1930" [ref=f16e18] [cursor=pointer]:
+        - /url: /
+        - img "Hasko" [ref=f16e19]
+        - generic [ref=f16e20]: Since 1930
+      - button "Open menu" [ref=f16e21]
+  - main [ref=f16e24]:
+    - generic [ref=f16e26]:
+      - generic [ref=f16e28]:
+        - heading "Machines that are still running in 25 years" [level=1] [ref=f16e30]: Machines that arestill running in25 years
+        - link "Browse all 21 machines" [ref=f16e31] [cursor=pointer]:
+          - /url: "#machine-finder"
+      - generic:
+        - generic "Hasko machinery in operation"
+    - generic [ref=f16e33]:
+      - generic [ref=f16e34]: 96 YEARS
+      - generic [ref=f16e35]: 25-YEAR SERVICE LIFE
+      - generic [ref=f16e36]: 21 MACHINES
+    - generic [ref=f16e38]:
+      - heading "Four production lines, one engineering approach" [level=2] [ref=f16e39]
+      - generic [ref=f16e41]:
+        - link "Solid & engineered flooring End matchers, side matchers, pre-surfacers and truck flooring lines. 7 MACHINES 400 FPM" [ref=f16e42] [cursor=pointer]:
+          - /url: "?application=flooring#machine-finder"
+          - generic [ref=f16e44]:
+            - generic [ref=f16e45]:
+              - paragraph [ref=f16e46]: Solid & engineered flooring
+              - paragraph [ref=f16e47]: End matchers, side matchers, pre-surfacers and truck flooring lines.
+            - generic [ref=f16e48]:
+              - generic [ref=f16e49]: 7 MACHINES
+              - generic [ref=f16e50]: 400 FPM
+        - link "Ripped products & rough mill Gang ripsaws, scan/rip lines and strip saws built to lift yield. 6 MACHINES 7,000 BF/HR" [ref=f16e51] [cursor=pointer]:
+          - /url: "?application=ripped-products#machine-finder"
+          - generic [ref=f16e53]:
+            - generic [ref=f16e54]:
+              - paragraph [ref=f16e55]: Ripped products & rough mill
+              - paragraph [ref=f16e56]: Gang ripsaws, scan/rip lines and strip saws built to lift yield.
+            - generic [ref=f16e57]:
+              - generic [ref=f16e58]: 6 MACHINES
+              - generic [ref=f16e59]: 7,000 BF/HR
+        - link "Dimensional wood, furn. & cabinetry Chopping, defect scanning and optimisation for components. 5 MACHINES SCAN-DRIVEN" [ref=f16e60] [cursor=pointer]:
+          - /url: "?application=dimensional-wood#machine-finder"
+          - generic [ref=f16e62]:
+            - generic [ref=f16e63]:
+              - paragraph [ref=f16e64]: Dimensional wood, furn. & cabinetry
+              - paragraph [ref=f16e65]: Chopping, defect scanning and optimisation for components.
+            - generic [ref=f16e66]:
+              - generic [ref=f16e67]: 5 MACHINES
+              - generic [ref=f16e68]: SCAN-DRIVEN
+        - link "Moulding & panelling Matchers, planers and surfacers for architectural profiles. 3 MACHINES HVY ARBORS" [ref=f16e69] [cursor=pointer]:
+          - /url: "?application=moulding#machine-finder"
+          - generic [ref=f16e71]:
+            - generic [ref=f16e72]:
+              - paragraph [ref=f16e73]: Moulding & panelling
+              - paragraph [ref=f16e74]: Matchers, planers and surfacers for architectural profiles.
+            - generic [ref=f16e75]:
+              - generic [ref=f16e76]: 3 MACHINES
+              - generic [ref=f16e77]: HVY ARBORS
+  - button "Open Next.js Dev Tools" [ref=f16e83] [cursor=pointer]
+  - alert [ref=f16e87]

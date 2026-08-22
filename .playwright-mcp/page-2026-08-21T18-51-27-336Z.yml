@@ -1,0 +1,57 @@
+- generic [active] [ref=f11e1]:
+  - banner [ref=f11e3]:
+    - generic [ref=f11e4]:
+      - link "Hasko Since 1930" [ref=f11e5] [cursor=pointer]:
+        - /url: /
+        - img "Hasko" [ref=f11e6]
+        - generic [ref=f11e7]: Since 1930
+      - generic [ref=f11e9]:
+        - generic [ref=f11e10]: Booth 102
+        - generic [ref=f11e13]: 25 - 28 Aug
+        - link "Book a Meeting" [ref=f11e16] [cursor=pointer]:
+          - /url: "#contact"
+      - button "Open menu" [ref=f11e17]
+  - main [ref=f11e20]:
+    - generic [ref=f11e22]:
+      - generic [ref=f11e24]:
+        - heading "Machines that are still running in 25 years" [level=1] [ref=f11e26]: Machines that arestill running in25 years
+        - link "Browse all 21 machines" [ref=f11e27] [cursor=pointer]:
+          - /url: "#machine-finder"
+      - generic "Hasko machinery in operation" [ref=f11e29]
+    - generic [ref=f11e31]:
+      - generic [ref=f11e32]: 96 YEARS
+      - generic [ref=f11e33]: 25-YEAR SERVICE LIFE
+      - generic [ref=f11e34]: 21 MACHINES
+    - generic [ref=f11e36]:
+      - heading "Four production lines, one engineering approach" [level=2] [ref=f11e37]
+      - generic [ref=f11e39]:
+        - link "Solid & engineered flooring 7 MACHINES 400 FPM" [ref=f11e40] [cursor=pointer]:
+          - /url: "?application=flooring#machine-finder"
+          - generic [ref=f11e42]:
+            - paragraph [ref=f11e43]: Solid & engineered flooring
+            - generic [ref=f11e44]:
+              - generic [ref=f11e45]: 7 MACHINES
+              - generic [ref=f11e46]: 400 FPM
+        - link "Ripped products & rough mill 6 MACHINES 7,000 BF/HR" [ref=f11e47] [cursor=pointer]:
+          - /url: "?application=ripped-products#machine-finder"
+          - generic [ref=f11e49]:
+            - paragraph [ref=f11e50]: Ripped products & rough mill
+            - generic [ref=f11e51]:
+              - generic [ref=f11e52]: 6 MACHINES
+              - generic [ref=f11e53]: 7,000 BF/HR
+        - link "Dimensional wood, furn. & cabinetry 5 MACHINES SCAN-DRIVEN" [ref=f11e54] [cursor=pointer]:
+          - /url: "?application=dimensional-wood#machine-finder"
+          - generic [ref=f11e56]:
+            - paragraph [ref=f11e57]: Dimensional wood, furn. & cabinetry
+            - generic [ref=f11e58]:
+              - generic [ref=f11e59]: 5 MACHINES
+              - generic [ref=f11e60]: SCAN-DRIVEN
+        - link "Moulding & panelling 3 MACHINES HVY ARBORS" [ref=f11e61] [cursor=pointer]:
+          - /url: "?application=moulding#machine-finder"
+          - generic [ref=f11e63]:
+            - paragraph [ref=f11e64]: Moulding & panelling
+            - generic [ref=f11e65]:
+              - generic [ref=f11e66]: 3 MACHINES
+              - generic [ref=f11e67]: HVY ARBORS
+  - button "Open Next.js Dev Tools" [ref=f11e73] [cursor=pointer]
+  - alert [ref=f11e77]

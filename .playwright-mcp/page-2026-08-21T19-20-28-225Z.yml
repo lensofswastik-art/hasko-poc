@@ -1,0 +1,85 @@
+- generic [active] [ref=f17e1]:
+  - banner [ref=f17e3]:
+    - generic [ref=f17e4]:
+      - link "Hasko Since 1930" [ref=f17e5] [cursor=pointer]:
+        - /url: /
+        - img "Hasko" [ref=f17e6]
+        - generic [ref=f17e7]: Since 1930
+      - generic [ref=f17e9]:
+        - generic [ref=f17e10]:
+          - generic [ref=f17e11]: Booth 102
+          - generic [ref=f17e14]: Georgia World
+          - generic [ref=f17e17]: 25 - 28 Aug
+        - link "Book a Meeting" [ref=f17e20] [cursor=pointer]:
+          - /url: "#contact"
+      - link "Request a Quote" [ref=f17e22] [cursor=pointer]:
+        - /url: "#contact"
+    - generic [ref=f17e23]:
+      - navigation "Primary" [ref=f17e24]:
+        - link "Industries" [ref=f17e26] [cursor=pointer]:
+          - /url: "#industries"
+        - link "Machines" [ref=f17e30] [cursor=pointer]:
+          - /url: "#machine-finder"
+        - link "Automation" [ref=f17e34] [cursor=pointer]:
+          - /url: "#automation"
+        - link "Parts & Service" [ref=f17e36] [cursor=pointer]:
+          - /url: "#parts-service"
+        - link "About" [ref=f17e38] [cursor=pointer]:
+          - /url: "#why-heavy-built"
+      - generic [ref=f17e39]:
+        - button "Search" [ref=f17e40]
+        - link "423.648.5200" [ref=f17e43] [cursor=pointer]:
+          - /url: tel:+14236485200
+  - main [ref=f17e46]:
+    - generic [ref=f17e48]:
+      - generic [ref=f17e50]:
+        - heading "Machines that are still running in 25 years" [level=1] [ref=f17e52]: Machines that arestill running in25 years
+        - link "Browse all 21 machines" [ref=f17e53] [cursor=pointer]:
+          - /url: "#machine-finder"
+      - generic:
+        - generic "Hasko machinery in operation"
+    - generic [ref=f17e55]:
+      - generic [ref=f17e56]: 96 YEARS
+      - generic [ref=f17e57]: 25-YEAR SERVICE LIFE
+      - generic [ref=f17e58]: 21 MACHINES
+    - generic [ref=f17e60]:
+      - heading "Four production lines, one engineering approach" [level=2] [ref=f17e61]
+      - generic [ref=f17e63]:
+        - link "Solid & engineered flooring End matchers, side matchers, pre-surfacers and truck flooring lines. 7 MACHINES 400 FPM" [ref=f17e64] [cursor=pointer]:
+          - /url: "?application=flooring#machine-finder"
+          - generic [ref=f17e66]:
+            - generic [ref=f17e67]:
+              - paragraph [ref=f17e68]: Solid & engineered flooring
+              - paragraph [ref=f17e69]: End matchers, side matchers, pre-surfacers and truck flooring lines.
+            - generic [ref=f17e70]:
+              - generic [ref=f17e71]: 7 MACHINES
+              - generic [ref=f17e72]: 400 FPM
+        - link "Ripped products & rough mill Gang ripsaws, scan/rip lines and strip saws built to lift yield. 6 MACHINES 7,000 BF/HR" [ref=f17e73] [cursor=pointer]:
+          - /url: "?application=ripped-products#machine-finder"
+          - generic [ref=f17e75]:
+            - generic [ref=f17e76]:
+              - paragraph [ref=f17e77]: Ripped products & rough mill
+              - paragraph [ref=f17e78]: Gang ripsaws, scan/rip lines and strip saws built to lift yield.
+            - generic [ref=f17e79]:
+              - generic [ref=f17e80]: 6 MACHINES
+              - generic [ref=f17e81]: 7,000 BF/HR
+        - link "Dimensional wood, furn. & cabinetry Chopping, defect scanning and optimisation for components. 5 MACHINES SCAN-DRIVEN" [ref=f17e82] [cursor=pointer]:
+          - /url: "?application=dimensional-wood#machine-finder"
+          - generic [ref=f17e84]:
+            - generic [ref=f17e85]:
+              - paragraph [ref=f17e86]: Dimensional wood, furn. & cabinetry
+              - paragraph [ref=f17e87]: Chopping, defect scanning and optimisation for components.
+            - generic [ref=f17e88]:
+              - generic [ref=f17e89]: 5 MACHINES
+              - generic [ref=f17e90]: SCAN-DRIVEN
+        - link "Moulding & panelling Matchers, planers and surfacers for architectural profiles. 3 MACHINES HVY ARBORS" [ref=f17e91] [cursor=pointer]:
+          - /url: "?application=moulding#machine-finder"
+          - generic [ref=f17e93]:
+            - generic [ref=f17e94]:
+              - paragraph [ref=f17e95]: Moulding & panelling
+              - paragraph [ref=f17e96]: Matchers, planers and surfacers for architectural profiles.
+            - generic [ref=f17e97]:
+              - generic [ref=f17e98]: 3 MACHINES
+              - generic [ref=f17e99]: HVY ARBORS
+  - button "Open Next.js Dev Tools" [ref=f17e105] [cursor=pointer]
+  - alert [ref=f17e109]
