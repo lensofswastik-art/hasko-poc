@@ -704,3 +704,308 @@ Import traces:
 [ 1070480ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
 [ 1070632ms] [LOG] [Fast Refresh] done in 123ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
 [ 1070635ms] [LOG] [Fast Refresh] done in 123ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1148052ms] [ERROR] ./components/announcement-bar.tsx:30:45
+Error: Expected '</', got 'string literal'
+  28 |         </span> */}
+  29 |         <span className="flex items-center gap-1.5 whitespace-nowrap'}>
+> 30 |           <Storefront size={16} weight="fill" className="shrink-0" />
+     |                                             ^^^^^^^^^^^^^
+  31 |           Booth 102
+  32 |         </span>
+  33 |         <span
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1148426ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1155224ms] [ERROR] ./components/announcement-bar.tsx:29:31
+Error: Expected '</', got 'ident'
+  27 |           <img src="/iwf.png" alt="IWF 2026" className="h-10 w-auto" />
+  28 |         </span> */}
+> 29 |         <span className={flex items-center gap-1.5 whitespace-nowrap'}>
+     |                               ^^^^^
+  30 |           <Storefront size={16} weight="fill" className="shrink-0" />
+  31 |           Booth 102
+  32 |         </span>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1155294ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1156569ms] [ERROR] ./components/announcement-bar.tsx:29:29
+Error: Expected '</', got 'ident'
+  27 |           <img src="/iwf.png" alt="IWF 2026" className="h-10 w-auto" />
+  28 |         </span> */}
+> 29 |         <span className={₹flex items-center gap-1.5 whitespace-nowrap'}>
+     |                           ^^^^
+  30 |           <Storefront size={16} weight="fill" className="shrink-0" />
+  31 |           Booth 102
+  32 |         </span>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1158093ms] [ERROR] ./components/announcement-bar.tsx:29:31
+Error: Expected '</', got 'ident'
+  27 |           <img src="/iwf.png" alt="IWF 2026" className="h-10 w-auto" />
+  28 |         </span> */}
+> 29 |         <span className={flex items-center gap-1.5 whitespace-nowrap'}>
+     |                               ^^^^^
+  30 |           <Storefront size={16} weight="fill" className="shrink-0" />
+  31 |           Booth 102
+  32 |         </span>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1159247ms] [ERROR] ./components/announcement-bar.tsx:29:32
+Error: Expected '</', got 'ident'
+  27 |           <img src="/iwf.png" alt="IWF 2026" className="h-10 w-auto" />
+  28 |         </span> */}
+> 29 |         <span className={~flex items-center gap-1.5 whitespace-nowrap'}>
+     |                                ^^^^^
+  30 |           <Storefront size={16} weight="fill" className="shrink-0" />
+  31 |           Booth 102
+  32 |         </span>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1160457ms] [ERROR] ./components/announcement-bar.tsx:29:31
+Error: Expected '</', got 'ident'
+  27 |           <img src="/iwf.png" alt="IWF 2026" className="h-10 w-auto" />
+  28 |         </span> */}
+> 29 |         <span className={flex items-center gap-1.5 whitespace-nowrap'}>
+     |                               ^^^^^
+  30 |           <Storefront size={16} weight="fill" className="shrink-0" />
+  31 |           Booth 102
+  32 |         </span>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1161564ms] [ERROR] ./components/announcement-bar.tsx:29:29
+Error: Expected '</', got 'ident'
+  27 |           <img src="/iwf.png" alt="IWF 2026" className="h-10 w-auto" />
+  28 |         </span> */}
+> 29 |         <span className={₹flex items-center gap-1.5 whitespace-nowrap'}>
+     |                           ^^^^
+  30 |           <Storefront size={16} weight="fill" className="shrink-0" />
+  31 |           Booth 102
+  32 |         </span>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1162895ms] [ERROR] ./components/announcement-bar.tsx:29:31
+Error: Expected '</', got 'ident'
+  27 |           <img src="/iwf.png" alt="IWF 2026" className="h-10 w-auto" />
+  28 |         </span> */}
+> 29 |         <span className={flex items-center gap-1.5 whitespace-nowrap'}>
+     |                               ^^^^^
+  30 |           <Storefront size={16} weight="fill" className="shrink-0" />
+  31 |           Booth 102
+  32 |         </span>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1167140ms] [ERROR] ./components/announcement-bar.tsx:29:32
+Error: Expected '</', got 'ident'
+  27 |           <img src="/iwf.png" alt="IWF 2026" className="h-10 w-auto" />
+  28 |         </span> */}
+> 29 |         <span className={~flex items-center gap-1.5 whitespace-nowrap'}>
+     |                                ^^^^^
+  30 |           <Storefront size={16} weight="fill" className="shrink-0" />
+  31 |           Booth 102
+  32 |         </span>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1168210ms] [ERROR] ./components/announcement-bar.tsx:29:31
+Error: Expected '</', got 'ident'
+  27 |           <img src="/iwf.png" alt="IWF 2026" className="h-10 w-auto" />
+  28 |         </span> */}
+> 29 |         <span className={flex items-center gap-1.5 whitespace-nowrap'}>
+     |                               ^^^^^
+  30 |           <Storefront size={16} weight="fill" className="shrink-0" />
+  31 |           Booth 102
+  32 |         </span>
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1170837ms] [ERROR] ./components/announcement-bar.tsx:34:23
+Error: Expected '</', got 'ident'
+  32 |         </span>
+  33 |         <span
+> 34 |           className={`items-center gap-1.5 whitespace-nowrap ${full ? "hidden min-...
+     |                       ^^^^^
+  35 |         >
+  36 |           <MapPin size={16} weight="fill" className="shrink-0" />
+  37 |           Georgia World
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1170933ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1175244ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1175379ms] [LOG] [Fast Refresh] done in 130ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1175393ms] [LOG] [Fast Refresh] done in 130ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1179445ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1179463ms] [LOG] [Fast Refresh] done in 2ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1179527ms] [LOG] [Fast Refresh] done in 2ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1180923ms] [ERROR] ./components/announcement-bar.tsx:34:23
+Error: Expected '</', got 'ident'
+  32 |         </span>
+  33 |         <span
+> 34 |           className={`items-center gap-1.5 whitespace-nowrap ${full ? "hidden min-...
+     |                       ^^^^^
+  35 |         >
+  36 |           <MapPin size={16} weight="fill" className="shrink-0" />
+  37 |           Georgia World
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/announcement-bar.tsx [Client Component Browser]
+    ./components/site-header.tsx [Client Component Browser]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/announcement-bar.tsx [Client Component SSR]
+    ./components/site-header.tsx [Client Component SSR]
+    ./components/site-header.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:1052
+[ 1180995ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1182641ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1182679ms] [LOG] [Fast Refresh] done in 1ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1182718ms] [LOG] [Fast Refresh] done in 1ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1184345ms] [LOG] [Fast Refresh] done in 1ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1190290ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1190319ms] [LOG] [Fast Refresh] done in 25ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
+[ 1190387ms] [LOG] [Fast Refresh] done in 25ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1e8vcs8._.js:776
