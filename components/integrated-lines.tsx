@@ -80,7 +80,29 @@ function useIsDesktop() {
 // closer in. The logo lockup sits deeper still (0.45, well past the model
 // codes) so it lands near the bottom of the visible dial with clear
 // breathing room above it, instead of crowding the row right above it.
-const RADIUS = { image: 1.08, badge: 1, title: 0.9, desc: 0.82, model: 0.76, logo: 0.45 };
+// image is deliberately close enough to the badge/arc's own radius (1)
+// that it overlaps — the images are meant to sit BEHIND the circle surface
+// and its arc, poking up above the rim with the rest tucked under it, not
+// float entirely clear of it. That depth ordering is handled by DOM order
+// (images render before the circle+arc; badges/text render after), not by
+// z-index — each "hand" has its own rotate transform, which (per the CSS
+// spec) makes it establish its own stacking context, so z-index on a
+// child can't reach out and reorder it against a sibling SVG anyway.
+const RADIUS = {
+  image: 1.08,
+  badge: 1,
+  title: 0.9,
+  desc: 0.82,
+  model: 0.76,
+  // Logo lockup and closing line used to be two independently-positioned
+  // ratios (0.45 and 0.28) — their gap was whatever the DIFFERENCE between
+  // two radius fractions happened to render as, scaling with dialSize
+  // rather than being an actual fixed value. They're one flex column now
+  // (a real 16px gap between them, via CSS gap, at any dialSize) anchored
+  // by this single ratio — moved up from 0.45 to 0.58 to close some of the
+  // gap above it too.
+  partnership: 0.58,
+};
 // The hand's own `top:X%` coordinate runs the opposite way from RADIUS
 // (0% at the rim/dial edge, 100% at the centre — see the hand's CSS below),
 // so every ratio gets inverted once here rather than at each of the 5
@@ -104,14 +126,21 @@ function arcPath(r: number, cx: number, cy: number, fromDeg: number, toDeg: numb
 // number badges sit on, from the first node's angle to the last's.
 const ARC_D = arcPath(497, 500, 500, NODES[0].angle, NODES[NODES.length - 1].angle);
 
-// anchorY (dial centre, relative to the stage's own top) = 0.54*D + 200 —
-// 0.54*D is 1.08*R (the image thumbnail's radius, the outermost element),
-// so the topmost point always lands exactly 200px below the stage's top
-// edge regardless of dialSize (clearing the fixed global header, 177px
-// measured). logoCoefficient carries that same relationship through to the
-// deepest element (the logo, ratio 0.45): logoBottom = D*logoCoefficient +
-// 200 + a small allowance for the logo's own height past its centre point.
-const LOGO_COEFFICIENT = 0.54 - RADIUS.logo / 2 + 0.01223;
+// anchorY (dial centre, relative to the stage's own top) =
+// ANCHOR_COEFFICIENT*D + 200 — ANCHOR_COEFFICIENT*D is RADIUS.image*R (the
+// image thumbnail's radius, the outermost element), so the topmost point
+// always lands exactly 200px below the stage's top edge regardless of
+// dialSize (clearing the fixed global header, 177px measured).
+// DEEPEST_COEFFICIENT carries that same relationship through to the
+// deepest element — the partnership block (logo row + closing line as one
+// flex column): deepestBottom = D*DEEPEST_COEFFICIENT + 200, positioning
+// the block's CENTRE. The block's own height is no longer purely
+// D-proportional (the closing line and the 16px gap are fixed regardless
+// of dialSize), so getting from centre to the block's actual bottom edge
+// needs a real fixed allowance, not the small rounding fudge the old
+// single-ratio elements used — see visibleHeight below.
+const ANCHOR_COEFFICIENT = RADIUS.image / 2;
+const DEEPEST_COEFFICIENT = ANCHOR_COEFFICIENT - RADIUS.partnership / 2;
 
 export function IntegratedLines() {
   const isDesktop = useIsDesktop();
@@ -160,7 +189,11 @@ export function IntegratedLines() {
   // clipped by this box's own overflow-hidden, and because the section is
   // in normal flow (not stretched to fill a pinned viewport), there's
   // nothing left over afterward for dead space to occupy.
-  const visibleHeight = dialSize * LOGO_COEFFICIENT + 200 + 40;
+  // +90 (not the old +40) covers the block's fixed-height half (16px gap +
+  // the closing line's own ~2-line height, roughly 56px at text-lg — none
+  // of that scales with dialSize the way the logo row does) on top of the
+  // usual small margin.
+  const visibleHeight = dialSize * DEEPEST_COEFFICIENT + 200 + 90;
 
   return (
     <section id="integrated-lines" className="relative bg-black">
@@ -197,10 +230,59 @@ export function IntegratedLines() {
                 width: dialSize,
                 height: dialSize,
                 left: "50%",
-                top: dialSize * 0.54 + 200,
+                top: dialSize * ANCHOR_COEFFICIENT + 200,
                 transform: "translate(-50%, -50%)",
               }}
             >
+              {/* Images render BEFORE the circle+arc so the opaque circle
+                  fill paints over their lower portion — the "poking up from
+                  behind the rim" look — while badges/text (rendered further
+                  below, after the svg) stay on top of everything. A
+                  duplicate hand rather than reordering JSX within the main
+                  one below: that hand's rotate transform makes it its own
+                  stacking context, so a child inside it can never paint
+                  behind a sibling of the hand itself (the svg) — moving
+                  the image out to its own hand, positioned identically, is
+                  the only way to actually split the depth ordering. */}
+              {NODES.map((node, i) => (
+                <motion.div
+                  key={`image-${node.model}`}
+                  className="absolute bottom-1/2 left-1/2 h-1/2 w-0"
+                  style={{ transformOrigin: "bottom", rotate: node.angle }}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  transition={
+                    prefersReducedMotion
+                      ? { duration: 0 }
+                      : { duration: 0.5, delay: i * 0.12, ease: [0.2, 0.7, 0.3, 1] }
+                  }
+                >
+                  {/* A plain w-[9%] here would resolve against the hand's
+                      own width — which is 0, by design (it's a positioning
+                      axis, not a box) — collapsing this to nothing, so it's
+                      sized from dialSize (0.09 of the diameter, matching
+                      the ratio measured off Figma) instead. */}
+                  <div
+                    className="absolute left-1/2 overflow-hidden bg-surface"
+                    style={{
+                      top: `${TOP_PCT.image}%`,
+                      width: dialSize * 0.09,
+                      aspectRatio: "1 / 1",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  >
+                    <Image
+                      src={nodeImage(node.machineSlug)}
+                      alt=""
+                      fill
+                      sizes="220px"
+                      className="object-cover"
+                    />
+                  </div>
+                </motion.div>
+              ))}
+
               <svg viewBox="0 0 1000 1000" className="absolute inset-0 h-full w-full" aria-hidden="true">
                 <circle cx="500" cy="500" r="500" fill="#1E1E1E" />
                 <motion.path
@@ -236,29 +318,6 @@ export function IntegratedLines() {
                       : { duration: 0.5, delay: i * 0.12, ease: [0.2, 0.7, 0.3, 1] }
                   }
                 >
-                  {/* A plain w-[9%] here would resolve against the hand's
-                      own width — which is 0, by design (it's a positioning
-                      axis, not a box) — collapsing this to nothing, so it's
-                      sized from dialSize (0.09 of the diameter, matching
-                      the ratio measured off Figma) instead. */}
-                  <div
-                    className="absolute left-1/2 overflow-hidden bg-surface"
-                    style={{
-                      top: `${TOP_PCT.image}%`,
-                      width: dialSize * 0.09,
-                      aspectRatio: "1 / 1",
-                      transform: "translate(-50%, -50%)",
-                    }}
-                  >
-                    <Image
-                      src={nodeImage(node.machineSlug)}
-                      alt=""
-                      fill
-                      sizes="220px"
-                      className="object-cover"
-                    />
-                  </div>
-
                   <div
                     className="absolute left-1/2 flex size-[30px] items-center justify-center rounded-full bg-brand-red"
                     style={{
@@ -302,46 +361,59 @@ export function IntegratedLines() {
                   </a>
 
                   {/* Figma's "Hasko × Mekanika" partnership lockup (node
-                      322:640) sits on this same angle-0 axis, deeper toward
-                      centre than even the model code. Nested here rather
-                      than positioned separately against the dial: the
-                      hand's top:X% coordinate system is already proven
-                      correct (every other element uses it). It rides along
-                      with node 3's reveal rather than getting its own
-                      animation — a brand mark, not one of the 5 steps. */}
+                      322:640) plus the closing line mobile already carries
+                      under it — one flex column now, not two independently
+                      -positioned ratios, so the gap between them is a real
+                      16px (via CSS gap) at any dialSize rather than
+                      whatever two radius fractions happened to render as.
+                      Nested in this hand rather than positioned separately
+                      against the dial: the hand's top:X% coordinate system
+                      is already proven correct (every other element uses
+                      it). Rides along with node 3's reveal rather than
+                      getting its own animation — a brand mark, not one of
+                      the 5 steps. */}
                   {node.angle === 0 && (
                     <div
-                      className="absolute left-1/2 flex items-center"
+                      className="absolute left-1/2 flex flex-col items-center gap-4"
                       style={{
-                        top: `${TOP_PCT.logo}%`,
-                        gap: dialSize * 0.01223,
+                        top: `${TOP_PCT.partnership}%`,
                         transform: "translate(-50%, -50%)",
                       }}
                     >
-                      <div
-                        className="relative"
-                        style={{ height: dialSize * 0.02447, width: dialSize * 0.108 }}
-                      >
-                        <Image src="/assets/haskologo-header.svg" alt="Hasko" fill sizes="203px" />
+                      <div className="flex items-center" style={{ gap: dialSize * 0.01223 }}>
+                        <div
+                          className="relative"
+                          style={{ height: dialSize * 0.02447, width: dialSize * 0.108 }}
+                        >
+                          <Image src="/assets/haskologo-header.svg" alt="Hasko" fill sizes="203px" />
+                        </div>
+                        <span
+                          className="text-brand-red"
+                          style={{ fontSize: dialSize * 0.02128 }}
+                        >
+                          ×
+                        </span>
+                        <div
+                          className="relative"
+                          style={{ height: dialSize * 0.02447, width: dialSize * 0.1016 }}
+                        >
+                          <Image
+                            src="/mechanica.png"
+                            alt="Mekanika"
+                            fill
+                            sizes="191px"
+                            className="object-contain"
+                          />
+                        </div>
                       </div>
-                      <span
-                        className="text-brand-red"
-                        style={{ fontSize: dialSize * 0.02128 }}
+
+                      <p
+                        className="text-center text-lg italic text-muted"
+                        style={{ width: dialSize * 0.34 }}
                       >
-                        ×
-                      </span>
-                      <div
-                        className="relative"
-                        style={{ height: dialSize * 0.02447, width: dialSize * 0.1016 }}
-                      >
-                        <Image
-                          src="/mechanica.png"
-                          alt="Mekanika"
-                          fill
-                          sizes="191px"
-                          className="object-contain"
-                        />
-                      </div>
+                        This is why a buyer chooses Hasko over a component
+                        supplier.
+                      </p>
                     </div>
                   )}
                 </motion.div>
@@ -352,19 +424,28 @@ export function IntegratedLines() {
       ) : (
         <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-10 md:py-28">
           {/* Mobile: unchanged linear timeline — the brief keeps this flow
-              as-is, only the desktop layout moves to the circular dial. */}
-          <div className="flex flex-col gap-10">
-            <div className="flex flex-col gap-3">
-              <h2 className="font-display max-w-xl text-3xl font-semibold uppercase leading-[1.05] text-white">
-                One line. <br /> One number to call.
-              </h2>
-            </div>
-            <p className="max-w-md text-lg leading-relaxed text-body">
+              as-is, only the desktop layout moves to the circular dial.
+              CTA copy and position match desktop ("Talk to an engineer"
+              right after the standfirst, not stranded at the end after all
+              5 nodes) — but H2 stays centred while the standfirst and CTA
+              go left-aligned, an intentional asymmetry rather than fully
+              mirroring desktop's all-centred block. */}
+          <div className="flex flex-col gap-6">
+            <h2 className="font-display max-w-xl text-center text-3xl font-semibold uppercase leading-[1.05] text-white">
+              One line. <br /> One number to call.
+            </h2>
+            <p className="max-w-md text-base leading-relaxed text-body">
               Hasko and Mekanika build the whole line, from the moment
               lumber enters the plant to the moment finished flooring
               leaves it. Scanning, ripping, matching, handling. Engineered
               to run together.
             </p>
+            <a
+              href="#contact"
+              className="self-start bg-chip px-[15px] py-[13px] text-base font-semibold text-black transition-colors hover:bg-white"
+            >
+              Talk to an engineer
+            </a>
           </div>
 
           <div className="relative mt-16">
@@ -412,18 +493,22 @@ export function IntegratedLines() {
             </ol>
           </div>
 
+          {/* Present on desktop (inside the wheel, node 322:640) but
+              missing here entirely. Same lockup, static sizing since
+              there's no dial diameter to scale it against on this layout. */}
+          <div className="mt-16 flex items-center justify-center gap-3">
+            <div className="relative h-9 w-[159px]">
+              <Image src="/assets/haskologo-header.svg" alt="Hasko" fill />
+            </div>
+            <span className="text-2xl text-brand-red">×</span>
+            <div className="relative h-9 w-[147px]">
+              <Image src="/mechanica.png" alt="Mekanika" fill className="object-contain" />
+            </div>
+          </div>
+
           <p className="mt-16 text-center text-lg italic text-muted">
             This is why a buyer chooses Hasko over a component supplier.
           </p>
-
-          <div className="mt-8 flex justify-center">
-            <a
-              href="#contact"
-              className="bg-chip px-[15px] py-[13px] text-base font-semibold text-black transition-colors hover:bg-white"
-            >
-              Talk to an engineer about your line →
-            </a>
-          </div>
         </div>
       )}
     </section>
