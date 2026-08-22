@@ -16,7 +16,32 @@
   <link rel="stylesheet" href="css/sections.css">
 </head>
 <body>
-  <!-- 00 announcement -->
+  <!--
+    00 · Announcement bar — component #1, closes 3.9 (IWF presence absent).
+    A `<div>`, not a `<section>` — this is a global utility strip (a
+    conditional promo band), not page content. Conditional render, no
+    empty state: the `hidden` attribute is the default (matching the
+    .quote-drawer[hidden] convention already in components.css), so with
+    no JS, or with js/motion.js's IS_EVENT_LIVE constant false, the div
+    contributes zero space and the header sits flush at the top — see
+    initAnnouncementBar() in js/motion.js, which removes `hidden` only
+    when the event is live and the visitor hasn't dismissed the bar this
+    session (sessionStorage). `.on-dark` swaps --focus/--red automatically
+    (tokens.css), so every var(--red) below already resolves to
+    --red-light, never the plain --red that fails 3.36:1 on steel.
+  -->
+  <div class="announcement-bar on-dark" data-announcement-bar hidden>
+    <div class="container announcement-bar__inner">
+      <p class="announcement-bar__text">
+        <span class="announcement-bar__label mono">IWF ATLANTA 2026</span>
+        <span class="announcement-bar__detail">Booth #XXXX &middot; 25&ndash;28 Aug &middot; Georgia World Congress Center</span>
+        <a href="index.html#contact" class="announcement-bar__link">Book a meeting at the show &rarr;</a>
+      </p>
+      <button type="button" class="announcement-bar__dismiss" data-announcement-dismiss aria-label="Dismiss announcement">
+        <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
 
   <!-- header
        Anchor-id contract for later tasks — this task wires nav/footer links
@@ -292,7 +317,43 @@
     </svg>
   </div>
 
-  <!-- 02 trust strip -->
+  <!--
+    02 · Trust strip — convention 7 (heritage/credentials surfaced).
+    Five items: two text badges (EST. 1930, MADE IN THE USA) plus three
+    partner/association marks (WMMA, Mekanika, USNR — USNR appears on
+    Hasko's IWF exhibitor listing; the current live site mentions only
+    Mekanika, see CLAUDE.md §6). The three marks are real <img> elements
+    pointing at plain-text placeholder wordmark SVGs in assets/ — these
+    are third-party organisations' marks, not Hasko's own, and no real
+    logo files exist for them in this repo, so per CLAUDE.md §11's
+    honest-placeholder principle (same treatment as the machine imagery)
+    they're rendered as neutral typeset wordmarks, not a fabricated
+    "official" logo. Monochrome by default, full colour on hover via a
+    CSS filter transition on the <img> itself (grayscale(1) -> none) —
+    filter is the only way to recolour an external image on hover, since
+    CSS custom properties/currentColor can't reach into an <img src>.
+    The two text badges use --ink-2, not --ink-3: --ink-3's 3.4:1 pass is
+    for large text and non-text only (CLAUDE.md colour rules), and these
+    are 14px mono labels, so --ink-3 would fail 1.4.3 here even though
+    it's the right token for the (non-text, decorative) marks below.
+  -->
+  <section class="trust-strip" aria-labelledby="trust-strip-heading">
+    <h2 id="trust-strip-heading" class="sr-only">HASKO credentials and partners</h2>
+    <div class="container trust-strip__inner">
+      <p class="trust-strip__item trust-strip__item--text mono">EST. 1930</p>
+      <p class="trust-strip__item trust-strip__item--text mono">MADE IN THE USA</p>
+      <span class="trust-strip__item trust-strip__item--mark">
+        <img src="assets/trust-wmma.svg" alt="WMMA" width="92" height="24" loading="lazy">
+      </span>
+      <span class="trust-strip__item trust-strip__item--mark">
+        <img src="assets/trust-mekanika.svg" alt="Mekanika" width="140" height="24" loading="lazy">
+      </span>
+      <span class="trust-strip__item trust-strip__item--mark">
+        <img src="assets/trust-usnr.svg" alt="USNR" width="76" height="24" loading="lazy">
+      </span>
+    </div>
+  </section>
+
   <!-- 03 industry paths -->
   <!-- 04 machine finder -->
   <!-- 05 integrated lines -->

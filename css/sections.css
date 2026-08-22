@@ -267,3 +267,171 @@
   .hero__proof-item { font-size: var(--fs-body-l); }
   .hero-mobile-band { display: none; }
 }
+
+/* ============================================================================
+   00 · Announcement bar — closes 3.9
+   Component #1. Conditional dark band above the header. Default state is
+   the `hidden` attribute (see index.html) — matching the .quote-drawer
+   [hidden] convention already established in components.css, an explicit
+   `[hidden] { display: none }` override is required here too: without it,
+   the unconditional `display: flex` on `.announcement-bar:not([hidden])`
+   would still lose to the plain class selector `.announcement-bar` if one
+   ever got added, because author-origin specificity ties resolve on
+   *source order*, not on which rule "sounds" more default. Keeping the
+   flex declaration scoped to :not([hidden]) sidesteps that entirely: the
+   element has NO layout-producing rule at all while hidden, so it
+   contributes zero height/margin regardless of stylesheet order — the
+   empirical check for "IS_EVENT_LIVE = false leaves no gap" in the task
+   report confirms this holds.
+   ========================================================================= */
+.announcement-bar[hidden] { display: none; }
+.announcement-bar:not([hidden]) {
+  display: flex;
+  align-items: center;
+  min-height: var(--target-min);   /* 44px */
+}
+
+.announcement-bar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  width: 100%;
+  padding-block: var(--space-2);
+}
+
+.announcement-bar__text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  margin: 0;
+  min-width: 0;
+}
+
+.announcement-bar__label {
+  /* --fs-index (11px) is below the 14px floor responsive-check.mjs
+     enforces on every rendered text node — same conflict, same fix, as
+     .hero__eyebrow above: --fs-small for short mono badge copy. */
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tr-index);
+  text-transform: uppercase;
+  color: var(--red);   /* .on-dark resolves this to --red-light, 5.98:1 on steel */
+  white-space: nowrap;
+}
+
+.announcement-bar__detail {
+  /* Spec calls for 13px; bumped to the 14px floor for the same reason as
+     the label above. */
+  font-family: var(--font-secondary);
+  font-size: var(--fs-small);
+  color: var(--on-steel-2);
+}
+
+.announcement-bar__link {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-secondary);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--on-steel);
+  border-bottom: 1px solid var(--rule-dark);
+  white-space: nowrap;
+  transition: color var(--t-micro) var(--ease-standard),
+              border-color var(--t-micro) var(--ease-standard);
+}
+.announcement-bar__link:hover,
+.announcement-bar__link:focus-visible {
+  color: var(--red);
+  border-bottom-color: var(--red);
+}
+
+.announcement-bar__dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--target-min);
+  height: var(--target-min);
+  color: var(--on-steel-2);
+  border-radius: var(--r-input);
+  transition: color var(--t-micro) var(--ease-standard);
+}
+.announcement-bar__dismiss:hover { color: var(--on-steel); }
+
+@media (max-width: 767px) {
+  /* Drop the detail line on small screens so the label + link fit one
+     wrap-friendly row alongside the dismiss button without ballooning
+     the bar to three lines. */
+  .announcement-bar__detail { display: none; }
+}
+
+/* ============================================================================
+   02 · Trust strip — convention 7 (heritage/credentials surfaced)
+   Light surface, ~96px. Five items with vertical-rule dividers on desktop;
+   dividers drop and items wrap to two rows on mobile (border-left is
+   simplest — no extra pseudo-element math, and it disappears cleanly at
+   the breakpoint below).
+   ========================================================================= */
+.trust-strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--rule);
+}
+
+.trust-strip__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  padding-block: var(--space-4);
+}
+
+.trust-strip__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--space-6);
+  border-left: 1px solid var(--rule);
+}
+.trust-strip__item:first-child { border-left: none; }
+
+.trust-strip__item--text {
+  /* --ink-3 (3.4:1) is legal for large text and non-text only — these are
+     14px mono labels, so the accessible choice here is --ink-2, not the
+     --ink-3 the marks below use (those are non-text decorative images). */
+  color: var(--ink-2);
+  font-size: var(--fs-small);
+  letter-spacing: var(--tr-index);
+  white-space: nowrap;
+}
+
+.trust-strip__item--mark img {
+  display: block;
+  height: 22px;
+  width: auto;
+  /* Monochrome by default, full colour on hover — an <img> can't inherit
+     `color`/currentColor from the page the way an inline <svg> can, so a
+     CSS filter is the only lever that reaches into the image itself.
+     grayscale(1) is the practical equivalent of --ink-3's muted intent
+     for a non-text decorative mark. */
+  filter: grayscale(1);
+  opacity: 0.75;
+  transition: filter var(--t-micro) var(--ease-standard),
+              opacity var(--t-micro) var(--ease-standard);
+}
+.trust-strip__item--mark:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .trust-strip__inner { gap: var(--space-2) 0; }
+  .trust-strip__item {
+    border-left: none;
+    flex: 0 1 50%;
+    padding-block: var(--space-2);
+  }
+}

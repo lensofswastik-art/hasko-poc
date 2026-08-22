@@ -419,12 +419,59 @@ window.HaskoMotion = (function () {
     });
   }
 
+  /**
+   * Announcement bar (component #1, closes 3.9): conditional dark band
+   * above the header. Default markup carries the `hidden` attribute (zero
+   * space, matches the .quote-drawer[hidden] convention in
+   * components.css) — this only ever REMOVES `hidden`, never adds layout
+   * logic in CSS, so a false/dismissed state costs nothing structurally.
+   *
+   * IS_EVENT_LIVE is a hardcoded, documented constant: this is a static
+   * demo advertising one always-current event, not a scheduling system.
+   * In production this would be a date-range check against the event's
+   * published start/end (e.g. `Date.now() >= EVENT_START && Date.now() <=
+   * EVENT_END`) rather than a boolean flipped by hand.
+   */
+  function initAnnouncementBar() {
+    const IS_EVENT_LIVE = true; // production: replace with a date-range check against the event's start/end
+    const DISMISS_KEY = 'hasko-announcement-dismissed';
+
+    const bar = document.querySelector('[data-announcement-bar]');
+    if (!bar) return;
+
+    let dismissed = false;
+    try {
+      dismissed = window.sessionStorage.getItem(DISMISS_KEY) === '1';
+    } catch (e) {
+      // sessionStorage unavailable (private mode, disabled storage) — fail
+      // open and show the bar; dismissing it just won't persist.
+    }
+
+    if (!IS_EVENT_LIVE || dismissed) return; // stays [hidden] — zero footprint
+
+    bar.hidden = false;
+
+    const dismissBtn = bar.querySelector('[data-announcement-dismiss]');
+    if (dismissBtn) {
+      dismissBtn.addEventListener('click', () => {
+        bar.hidden = true;
+        try {
+          window.sessionStorage.setItem(DISMISS_KEY, '1');
+        } catch (e) {
+          // Storage write failed — the bar still hides for this page view,
+          // it just won't stay dismissed on the next one.
+        }
+      });
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initReveal();
     initMobileNav();
     initCountUp();
     initParallax();
     initHeroApplicationSelector();
+    initAnnouncementBar();
   });
 
   return {
@@ -437,5 +484,6 @@ window.HaskoMotion = (function () {
     initCountUp,
     initParallax,
     initHeroApplicationSelector,
+    initAnnouncementBar,
   };
 })();
