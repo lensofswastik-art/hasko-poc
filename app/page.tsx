@@ -6,6 +6,8 @@ import { IndustrySection } from "@/components/industry-section";
 import { MachineFinder } from "@/components/machine-finder";
 import { IntegratedLines } from "@/components/integrated-lines";
 import { Proof } from "@/components/proof";
+import { PartsService } from "@/components/parts-service";
+import { WhyHeavyBuilt } from "@/components/why-heavy-built";
 
 export default function Home() {
   return (
@@ -23,6 +25,8 @@ export default function Home() {
         </Suspense>
         <IntegratedLines />
         <Proof />
+        <PartsService />
+        <WhyHeavyBuilt />
       </main>
     </>
   );

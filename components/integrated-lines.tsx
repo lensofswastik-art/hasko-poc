@@ -434,7 +434,7 @@ export function IntegratedLines() {
             <h2 className="font-display max-w-xl text-center text-3xl font-semibold uppercase leading-[1.05] text-white">
               One line. <br /> One number to call.
             </h2>
-            <p className="max-w-md text-base leading-relaxed text-body">
+            <p className="max-w-md text-base leading-none text-body">
               Hasko and Mekanika build the whole line, from the moment
               lumber enters the plant to the moment finished flooring
               leaves it. Scanning, ripping, matching, handling. Engineered

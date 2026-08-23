@@ -63,8 +63,20 @@ function Stat({
 
 export function Proof() {
   return (
-    <section id="proof" className="bg-brand-red">
-      <div className="mx-auto max-w-[1440px] px-6 py-20 sm:px-10 md:py-28">
+    <section id="proof" className="relative overflow-hidden bg-brand-red">
+      {/* blueprint grid texture — tiled at its native 1440x820 size and
+          repeated, not stretched with `object-cover`: cover scales the
+          artwork to each section's own height, so two sections of
+          different heights sampled visibly different-scaled grids and the
+          lines never lined up at the seam between them. A fixed-size
+          repeating tile keeps every red section's grid identical. */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-[length:1440px_820px] bg-top bg-repeat opacity-90"
+        style={{ backgroundImage: "url(/assets/hero-bg-grid.svg)" }}
+        aria-hidden="true"
+      />
+
+      <div className="relative mx-auto max-w-[1440px] px-6 py-20 sm:px-10 md:py-28">
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="font-display max-w-2xl text-3xl font-semibold uppercase leading-[1.05] text-white sm:text-5xl">
             What changes when a Hasko goes in.
@@ -89,7 +101,7 @@ export function Proof() {
             </div>
 
             <div className="flex flex-1 flex-col gap-8 p-6 sm:p-9">
-              <p className="text-lg leading-relaxed text-white sm:text-2xl">
+              <p className="text-lg leading-none sm:text-2xl sm:leading-relaxed text-white">
                 &ldquo;After installing our new Hasko MPEM-C, through put
                 increased by 2k per shift. Yield increased by .5%, added
                 ability to cut 9&Prime; boards (with a much better cut). Out
@@ -133,7 +145,7 @@ export function Proof() {
             </div>
 
             <div className="flex flex-1 flex-col gap-8 p-6 sm:p-9">
-              <p className="text-lg leading-relaxed text-white sm:text-2xl">
+              <p className="text-lg leading-none sm:text-2xl sm:leading-relaxed text-white">
                 &ldquo;After installing our new Hasko MPEM-C, through put
                 increased by 2k per shift. Yield increased by .5%, added
                 ability to cut 9&Prime; boards (with a much better cut). Out
