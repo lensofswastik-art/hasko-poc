@@ -46,7 +46,7 @@ export function PartsService() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto max-w-[1440px] px-6 py-20 sm:px-10 md:py-28">
+      <div className="relative px-6 py-20 sm:px-10 md:py-28 xl:px-16">
 
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:items-start md:gap-16">
           {/* Card first in DOM (mobile: headline reads before the tool,

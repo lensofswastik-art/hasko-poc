@@ -110,23 +110,23 @@ export function WhyHeavyBuilt() {
       ref={sectionRef}
       className={`relative bg-brand-red ${reducedMotion ? "" : "h-[280vh]"}`}
     >
-      {/* blueprint grid texture — anchored to THIS section's own top edge
-          (not the inner sticky frame below), same as proof.tsx,
-          parts-service.tsx and resources.tsx, so the tile phase carries
-          through unbroken from the section above into the one after,
-          instead of restarting at wherever the sticky frame happens to
-          release. */}
-      <div
-        className="pointer-events-none absolute inset-0 bg-[length:1440px_820px] bg-top bg-repeat opacity-90"
-        style={{ backgroundImage: "url(/assets/hero-bg-grid.svg)" }}
-        aria-hidden="true"
-      />
-
-      {/* Sticky viewport-height frame: heading and card live IN HERE so
-          they pin as one static unit while the outer section supplies
-          scroll runway. The frame itself has no background of its own now
-          — the section's grid behind it shows through. */}
+      {/* Sticky viewport-height frame: background, heading and card all live
+          IN HERE so the whole frame — grid included — stays visually fixed
+          in the viewport for the entire scroll-jack pass, and only the card
+          content changes underneath it. Putting the grid on the OUTER tall
+          section instead (an earlier version of this fix) painted it onto a
+          280vh-tall element, so it necessarily travelled with the page as
+          the section scrolled by — the exact "grid scrolling" bug this
+          reverts. Cross-section seam continuity (why this got moved out
+          the first time) is a smaller visual nit than a moving background
+          during the card-cycle interaction itself. */}
       <div className="relative sticky top-0 flex h-[100svh] items-center overflow-hidden md:h-screen">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[length:1440px_820px] bg-top bg-repeat opacity-90"
+          style={{ backgroundImage: "url(/assets/hero-bg-grid.svg)" }}
+          aria-hidden="true"
+        />
+
         <div className="relative flex w-full flex-col gap-6 py-16 sm:gap-16 sm:py-20 md:flex-row md:items-center md:justify-between md:gap-8 md:py-0">
           <div className="flex max-w-xl flex-col gap-6 px-6 text-white sm:gap-10 sm:px-10 md:max-w-[852px] md:h-[472px] md:justify-between md:gap-0 md:py-2 md:pl-10">
             <h2 className="font-display text-3xl font-semibold uppercase leading-[1.05] sm:text-5xl md:whitespace-nowrap md:text-[52px]">

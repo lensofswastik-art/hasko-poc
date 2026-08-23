@@ -87,18 +87,20 @@ function ResourceCard({ resource }: { resource: (typeof RESOURCES)[number] }) {
 export function Resources() {
   return (
     <section id="resources" className="relative overflow-hidden bg-brand-red py-16 sm:py-20">
-      {/* blueprint grid texture — tiled at native size, same treatment as
-          proof/parts-service/why-heavy-built, so the lines line up across
-          every red section rather than each showing a differently-scaled
-          crop of the artwork. */}
+      {/* blueprint grid texture — anchored to this section's own top edge,
+          same tiling as proof.tsx, parts-service.tsx and why-heavy-built.tsx
+          so the tile phase carries through unbroken across every red
+          section's seam. */}
       <div
         className="pointer-events-none absolute inset-0 bg-[length:1440px_820px] bg-top bg-repeat opacity-90"
         style={{ backgroundImage: "url(/assets/hero-bg-grid.svg)" }}
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto max-w-[1440px] px-6 sm:px-10">
-        
+      <div className="relative px-6 sm:px-10 xl:px-16">
+        <span className="figure mb-10 block text-[11px] uppercase tracking-[0.14em] text-white/70 md:mb-16">
+          ( 08 ) &mdash;&mdash;&mdash;&mdash; Resources
+        </span>
         <h2 className="font-display max-w-2xl text-3xl font-semibold uppercase leading-[1.05] text-white sm:text-5xl">
           Everything downloadable, in one place.
         </h2>

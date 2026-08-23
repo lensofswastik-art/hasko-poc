@@ -76,7 +76,7 @@ export function Proof() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto max-w-[1440px] px-6 py-20 sm:px-10 md:py-28">
+      <div className="relative px-6 py-20 sm:px-10 md:py-28 xl:px-16">
         <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:justify-between">
           <h2 className="font-display max-w-2xl text-3xl font-semibold uppercase leading-[1.05] text-white sm:text-5xl">
             What changes when a Hasko goes in.

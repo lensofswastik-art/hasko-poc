@@ -9,6 +9,8 @@ import { Proof } from "@/components/proof";
 import { PartsService } from "@/components/parts-service";
 import { WhyHeavyBuilt } from "@/components/why-heavy-built";
 import { Resources } from "@/components/resources";
+import { Contact } from "@/components/contact";
+import { Footer } from "@/components/footer";
 
 export default function Home() {
   return (
@@ -29,7 +31,9 @@ export default function Home() {
         <PartsService />
         <WhyHeavyBuilt />
         <Resources />
+        <Contact />
       </main>
+      <Footer />
     </>
   );
 }
