@@ -26,12 +26,12 @@ export function AnnouncementBar({ full = false }: { full?: boolean }) {
         <span>
           <Image src="/IWF.svg" alt="IWF 2026" height={10} width={10} className="h-10 w-auto" />
         </span>
-        <span className={`flex items-center gap-1.5 whitespace-nowrap ${full ? "hidden min-[420px]:flex" : "hidden sm:flex"}`}>
+        <span className={`flex items-center gap-1.5 whitespace-nowrap ${full ? "hidden min-[500px]:flex" : "hidden sm:flex"}`}>
           <Storefront size={16} weight="fill" className="shrink-0" />
           Booth 102
         </span>
         <span
-          className={`items-center gap-1.5 whitespace-nowrap ${full ? "hidden min-[420px]:flex" : "hidden sm:flex"}`}
+          className={`items-center gap-1.5 whitespace-nowrap ${full ? "hidden min-[500px]:flex" : "hidden sm:flex"}`}
         >
           <MapPin size={16} weight="fill" className="shrink-0" />
           Georgia World
