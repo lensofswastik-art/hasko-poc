@@ -8,6 +8,7 @@ import { IntegratedLines } from "@/components/integrated-lines";
 import { Proof } from "@/components/proof";
 import { PartsService } from "@/components/parts-service";
 import { WhyHeavyBuilt } from "@/components/why-heavy-built";
+import { Resources } from "@/components/resources";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
         <Proof />
         <PartsService />
         <WhyHeavyBuilt />
+        <Resources />
       </main>
     </>
   );

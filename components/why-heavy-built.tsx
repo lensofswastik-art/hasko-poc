@@ -108,24 +108,25 @@ export function WhyHeavyBuilt() {
     <section
       id="why-heavy-built"
       ref={sectionRef}
-      className={`relative bg-brand-red ${reducedMotion ? "" : "h-[400vh]"}`}
+      className={`relative bg-brand-red ${reducedMotion ? "" : "h-[280vh]"}`}
     >
-      {/* Sticky viewport-height frame: background, heading and card all live
-          IN HERE so they pin as one static unit while the outer 400vh
-          section supplies scroll runway. Putting the grid texture on the
-          outer (tall) section instead — the earlier bug — stretched and
-          scrolled it with the page; anchoring it to this sticky frame keeps
-          it fixed exactly like the design. */}
-      <div className="relative sticky top-0 flex h-[100svh] items-center overflow-hidden md:h-screen">
-        {/* blueprint grid texture — tiled at native size like proof.tsx and
-            parts-service.tsx, so the lines line up across all three red
-            sections instead of each showing a differently-scaled crop. */}
-        <div
-          className="pointer-events-none absolute inset-0 bg-[length:1440px_820px] bg-top bg-repeat opacity-90"
-          style={{ backgroundImage: "url(/assets/hero-bg-grid.svg)" }}
-          aria-hidden="true"
-        />
+      {/* blueprint grid texture — anchored to THIS section's own top edge
+          (not the inner sticky frame below), same as proof.tsx,
+          parts-service.tsx and resources.tsx, so the tile phase carries
+          through unbroken from the section above into the one after,
+          instead of restarting at wherever the sticky frame happens to
+          release. */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-[length:1440px_820px] bg-top bg-repeat opacity-90"
+        style={{ backgroundImage: "url(/assets/hero-bg-grid.svg)" }}
+        aria-hidden="true"
+      />
 
+      {/* Sticky viewport-height frame: heading and card live IN HERE so
+          they pin as one static unit while the outer section supplies
+          scroll runway. The frame itself has no background of its own now
+          — the section's grid behind it shows through. */}
+      <div className="relative sticky top-0 flex h-[100svh] items-center overflow-hidden md:h-screen">
         <div className="relative flex w-full flex-col gap-6 py-16 sm:gap-16 sm:py-20 md:flex-row md:items-center md:justify-between md:gap-8 md:py-0">
           <div className="flex max-w-xl flex-col gap-6 px-6 text-white sm:gap-10 sm:px-10 md:max-w-[852px] md:h-[472px] md:justify-between md:gap-0 md:py-2 md:pl-10">
             <h2 className="font-display text-3xl font-semibold uppercase leading-[1.05] sm:text-5xl md:whitespace-nowrap md:text-[52px]">
