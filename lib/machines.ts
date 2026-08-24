@@ -237,6 +237,23 @@ export const industries = [
   },
 ] as const;
 
+// The site's own machine-category taxonomy (CLAUDE.md §6 header spec:
+// "Machines mega-menu: 12 categories in three columns"), shared between the
+// header mega-menu and the footer's Machines column so both list the same
+// names instead of two hand-maintained copies drifting apart.
+export const machineCategories = [
+  "Board ripping",
+  "End matching",
+  "Side matching",
+  "Planing",
+  "Chopping",
+  "Scanning",
+  "Feeding systems",
+  "Material handling",
+  "Special machines",
+  "Used machinery",
+];
+
 export const featuredMachineImages: Record<string, string> = {
   "gang-ripsaw": "/assets/machines/gang-ripsaw.png",
   endmatcher: "/assets/machines/end-matcher.png",

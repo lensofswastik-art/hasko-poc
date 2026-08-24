@@ -120,7 +120,13 @@ export function WhyHeavyBuilt() {
           reverts. Cross-section seam continuity (why this got moved out
           the first time) is a smaller visual nit than a moving background
           during the card-cycle interaction itself. */}
-      <div className="relative sticky top-0 flex h-[100svh] items-center overflow-hidden md:h-screen">
+      {/* top/height offset by the fixed header's own height (measured
+          ~177px) so this frame centres its content in the space actually
+          visible BELOW the header, not across the full viewport height —
+          without the offset, `items-center` centred against 100svh
+          including the space the header sits in front of, which visually
+          read as "pinned flush under the nav" rather than centred. */}
+      <div className="relative sticky top-[177px] flex h-[calc(100svh-177px)] items-center overflow-hidden md:h-[calc(100vh-177px)]">
         <div
           className="pointer-events-none absolute inset-0 bg-[length:1440px_820px] bg-top bg-repeat opacity-90"
           style={{ backgroundImage: "url(/assets/hero-bg-grid.svg)" }}

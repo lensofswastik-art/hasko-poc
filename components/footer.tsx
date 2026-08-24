@@ -7,24 +7,12 @@ import {
   LinkedinLogo,
   YoutubeLogo,
 } from "@phosphor-icons/react/dist/ssr";
+import { machineCategories } from "@/lib/machines";
 
 // CLAUDE.md §6, section 12 — footer nav, verbatim. Closes 3.8 (no footer
 // navigation at all on the current site) and 3.1 (dead Google+ link —
 // there is deliberately no Google+ icon here; see the "NO GOOGLE+" note
 // in the bottom bar instead of silently omitting the finding).
-const MACHINES = [
-  "Board ripping",
-  "End matching",
-  "Side matching",
-  "Planing",
-  "Chopping",
-  "Scanning",
-  "Feeding systems",
-  "Material handling",
-  "Special machines",
-  "Used machinery",
-];
-
 const INDUSTRIES = ["Flooring", "Ripped products", "Dimensional wood", "Moulding"];
 
 const COMPANY = ["About Hasko", "Careers", "News", "Contract manufacturing"];
@@ -75,7 +63,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 md:mt-16">
-          <FooterColumn title="Machines" links={MACHINES} />
+          <FooterColumn title="Machines" links={machineCategories} />
           <FooterColumn title="Industries" links={INDUSTRIES} />
           <FooterColumn title="Company" links={COMPANY} />
           <FooterColumn title="Support" links={SUPPORT} />
@@ -135,7 +123,7 @@ export function Footer() {
                 very last element on the page. Sized up from an earlier pass
                 (20px) to 32px — at 20px the mascot's detail was unreadable. */}
             <span className="hidden text-white/20 sm:inline">&middot;</span>
-            <span className="figure flex items-center gap-2 text-xs uppercase tracking-[0.08em] text-white/30">
+            <span className="figure flex items-center gap-2 text-sm font-medium uppercase tracking-[0.08em] text-white">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/HD%20Mascot.gif"
@@ -145,7 +133,22 @@ export function Footer() {
                 loading="lazy"
                 className="size-8 shrink-0"
               />
-              Curated by Happening
+              Handcrafted by{" "}
+              {/* The only blue anywhere on the site — deliberately outside
+                  Hasko's own red/neutral system (CLAUDE.md bans blue for
+                  the brand UI), since this is a third-party attribution
+                  link, not a Hasko interface element. #4C8DFF is close to a
+                  standard "external link" blue at a comfortable contrast on
+                  black; not a design-system token, this one line is the
+                  named exception. */}
+              <a
+                href="https://happening.design"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#4C8DFF] underline decoration-[#4C8DFF]/40 decoration-1 underline-offset-4 transition-colors hover:text-[#7BA9FF]"
+              >
+                Happening
+              </a>
             </span>
           </div>
           <div className="flex items-center gap-6">
